@@ -30,7 +30,16 @@
 }
 */
 
-
+- (ShapeKitPolygon *)loadWKBPolygonFromFile:(NSString *)file {
+	ShapeKitPolygon * poly = nil;
+	NSString *path = [[NSBundle mainBundle] pathForResource:file ofType:@"plist"];
+	NSDictionary *stupidDict = [NSDictionary dictionaryWithContentsOfFile:path];
+	NSData *geomData = [stupidDict objectForKey:@"shape"];
+	if (geomData && [geomData length]) {
+		poly = [[[ShapeKitPolygon alloc] initWithWKB:[geomData bytes] size:[geomData length]] autorelease];
+	}
+	return poly;
+}
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
@@ -134,13 +143,19 @@
     [theMap addOverlay:[line convexHull].geometry];
     [theMap addAnnotation:[line pointOnSurface].geometry];
     [theMap addAnnotation:[line centroid].geometry];
-     
-
-    
     
     [myPoint release];
     [polygon release];
     [line release];
+	
+	polygon = [self loadWKBPolygonFromFile:@"PlanID20-82"];
+    polygon.geometry.title = @"82";
+	[theMap addOverlay:polygon.geometry];
+
+	polygon = [self loadWKBPolygonFromFile:@"PlanID20-83"];
+    polygon.geometry.title = @"83";
+	[theMap addOverlay:polygon.geometry];
+	
 }
 
 
