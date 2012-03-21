@@ -33,8 +33,8 @@ set -u
 
 
 default_gcc_version=4.2
-default_iphoneos_version=4.2
-default_macos_version=10.6
+default_iphoneos_version=5.1
+default_macos_version=10.7
 
 GCC_VERSION="${GCC_VERSION:-$default_gcc_version}"
 export IPHONEOS_DEPLOYMENT_TARGET="${IPHONEOS_DEPLOYMENT_TARGET:-$default_iphoneos_version}"
@@ -101,17 +101,17 @@ case $target in
 esac
 
 
-platform_dir="/Developer/Platforms/${platform}.platform/Developer"
+platform_dir="/Applications/Xcode.app/Contents/Developer/Platforms/${platform}.platform/Developer"
 platform_bin_dir="${platform_dir}/usr/bin"
 platform_sdk_dir="${platform_dir}/SDKs/${platform}${IPHONEOS_DEPLOYMENT_TARGET}.sdk"
 prefix="${prefix:-${HOME}${platform_sdk_dir}}"
 
-export CC="${platform_bin_dir}/gcc-${GCC_VERSION}"
+export CC="${platform_bin_dir}/gcc"
 export CFLAGS="-arch ${arch} -pipe -Os -gdwarf-2 -isysroot ${platform_sdk_dir} ${extra_cflags}"
 export LDFLAGS="-arch ${arch} -isysroot ${platform_sdk_dir}"
-export CXX="${platform_bin_dir}/g++-${GCC_VERSION}"
+export CXX="${platform_bin_dir}/g++"
 export CXXFLAGS="${CFLAGS}"
-export CPP="/Developer/usr/bin/cpp-${GCC_VERSION}"
+export CPP="/Applications/Xcode.app/Contents/Developer/usr/bin/cpp"
 export CXXCPP="${CPP}"
 
 
