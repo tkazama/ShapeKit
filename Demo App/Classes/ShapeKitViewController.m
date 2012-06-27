@@ -138,9 +138,6 @@
 
     
     
-    [myPoint release];
-    [polygon release];
-    [line release];
 }
 
 
@@ -166,24 +163,20 @@
 }
 
 
-- (void)dealloc {
-	[theMap release];
-    [super dealloc];
-}
 
 #pragma mark -
 #pragma mark MapView Delegate methods
 
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay {
     if ([overlay isKindOfClass:[MKPolyline class]]) {
-        MKPolylineView *polylineView = [[[MKPolylineView alloc] initWithOverlay:overlay] autorelease];
+        MKPolylineView *polylineView = [[MKPolylineView alloc] initWithOverlay:overlay];
         polylineView.strokeColor = [UIColor redColor];
         polylineView.lineWidth = 5.0;
 
         return polylineView;
         
     } else if ([overlay isKindOfClass:[MKPolygon class]]) {
-        MKPolygonView *polygonView = [[[MKPolygonView alloc] initWithOverlay:overlay] autorelease];
+        MKPolygonView *polygonView = [[MKPolygonView alloc] initWithOverlay:overlay];
         polygonView.strokeColor = [UIColor redColor];
         polygonView.lineWidth = 5.0;
         polygonView.fillColor = [UIColor colorWithRed:0 green:0 blue:255 alpha:0.5];

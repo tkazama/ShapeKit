@@ -25,9 +25,9 @@
 	unsigned int numberOfCoords;
 }
 
-@property (nonatomic,retain) NSString *wktGeom;
-@property (nonatomic,retain) NSString *geomType;
-@property (nonatomic,retain) NSString *projDefinition;
+@property (nonatomic) NSString *wktGeom;
+@property (nonatomic) NSString *geomType;
+@property (nonatomic) NSString *projDefinition;
 @property (nonatomic) GEOSGeometry *geosGeom;
 @property (nonatomic) unsigned int numberOfCoords;
 
@@ -44,7 +44,7 @@ void log_and_exit(const char *fmt,...);
     MKPointAnnotation *geometry;
 //    unsigned int numberOfCoords;
 }
-@property (nonatomic,retain) MKPointAnnotation *geometry;
+@property (nonatomic) MKPointAnnotation *geometry;
 //@property (nonatomic) unsigned int numberOfCoords;
 -(id)initWithCoordinate:(CLLocationCoordinate2D)coordinate;
 
@@ -55,7 +55,7 @@ void log_and_exit(const char *fmt,...);
     MKPolyline *geometry;
 //    unsigned int numberOfCoords;
 }
-@property (nonatomic,retain) MKPolyline *geometry;
+@property (nonatomic) MKPolyline *geometry;
 //@property (nonatomic) unsigned int numberOfCoords;
 -(id)initWithCoordinates:(CLLocationCoordinate2D[])coordinates count:(unsigned int)count;
 
@@ -66,7 +66,8 @@ void log_and_exit(const char *fmt,...);
     MKPolygon *geometry;
 //    unsigned int numberOfCoords;
 }
-@property (nonatomic,retain) MKPolygon *geometry;
+@property (nonatomic) MKPolygon *geometry;
 //@property (nonatomic) unsigned int numberOfCoords;
+-(id)initWithCoordinates:(CLLocationCoordinate2D[])coordinates count:(unsigned int)count;
 
 @end

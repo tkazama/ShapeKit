@@ -6,6 +6,7 @@ build/
 lib_src/geos*
 lib_src/proj*
 
+xcuserdata
 *.pbxuser
 *.perspective
 *.perspectivev3

@@ -14,15 +14,15 @@
 
 -(ShapeKitPolygon *)envelope {
 //    return [[[ShapeKitPolygon alloc] initWithGeosGeometry:GEOSEnvelope_r(handle, geosGeom) GEOSContextHandle:ghandle] autorelease];
-    return [[[ShapeKitPolygon alloc] initWithGeosGeometry:GEOSEnvelope_r(handle, geosGeom)] autorelease];
+    return [[ShapeKitPolygon alloc] initWithGeosGeometry:GEOSEnvelope_r(handle, geosGeom)];
 }
 
 -(ShapeKitPolygon *)bufferWithWidth:(double)width {
-    return [[[ShapeKitPolygon alloc] initWithGeosGeometry:GEOSBuffer_r(handle, geosGeom, width, 0)] autorelease];
+    return [[ShapeKitPolygon alloc] initWithGeosGeometry:GEOSBuffer_r(handle, geosGeom, width, 0)];
 }
 
 -(ShapeKitPolygon *)convexHull {
-    return [[[ShapeKitPolygon alloc] initWithGeosGeometry:GEOSConvexHull_r(handle, geosGeom)] autorelease];
+    return [[ShapeKitPolygon alloc] initWithGeosGeometry:GEOSConvexHull_r(handle, geosGeom)];
 }
 
 -(NSString *)relationshipWithGeometry:(ShapeKitGeometry *)geometry {
@@ -30,11 +30,11 @@
 }
 
 -(ShapeKitPoint *)centroid {
-    return [[[ShapeKitPoint alloc] initWithGeosGeometry:GEOSGetCentroid_r(handle, geosGeom)] autorelease];
+    return [[ShapeKitPoint alloc] initWithGeosGeometry:GEOSGetCentroid_r(handle, geosGeom)];
 }
 
 -(ShapeKitPoint *)pointOnSurface {
-    return [[[ShapeKitPoint alloc] initWithGeosGeometry:GEOSPointOnSurface_r(handle, geosGeom)] autorelease];
+    return [[ShapeKitPoint alloc] initWithGeosGeometry:GEOSPointOnSurface_r(handle, geosGeom)];
 }
 
 @end

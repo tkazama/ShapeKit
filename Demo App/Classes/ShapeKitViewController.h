@@ -13,7 +13,7 @@
     IBOutlet MKMapView *theMap;
 }
 
-@property (nonatomic,retain) IBOutlet MKMapView *theMap;
+@property (nonatomic) IBOutlet MKMapView *theMap;
 
 @end
 
