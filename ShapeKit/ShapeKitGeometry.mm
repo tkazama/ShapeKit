@@ -24,6 +24,7 @@
     if (self != nil) {
         // initialize GEOS library
         handle = initGEOS_r(notice, log_and_exit);
+        _coords = NULL;
     }
     return self;
 }
@@ -107,6 +108,8 @@
 
 - (void) dealloc
 {
+    if (_coords)
+        free (_coords);
     GEOSGeom_destroy_r(handle, geosGeom);
     finishGEOS_r(handle);
 }
@@ -140,20 +143,20 @@ void log_and_exit(const char *fmt,...) {
 #pragma mark -
 
 @implementation ShapeKitPoint
-@synthesize geometry;//,numberOfCoords;
 
 -(id)initWithWKT:(NSString *) wkt {
     self = [super initWithWKT:wkt];
     if (self) {
         GEOSCoordSequence *sequence = GEOSCoordSeq_clone_r(handle, GEOSGeom_getCoordSeq(geosGeom));
-        geometry = [[MKPointAnnotation alloc] init];
         double xCoord;
         GEOSCoordSeq_getX_r(handle, sequence, 0, &xCoord);
         
         double yCoord;
         GEOSCoordSeq_getY_r(handle, sequence, 0, &yCoord);
-        geometry.coordinate = CLLocationCoordinate2DMake(yCoord, xCoord);
-        
+         
+        _coords = (CLLocationCoordinate2D *) malloc( sizeof(CLLocationCoordinate2D) );
+        *_coords = CLLocationCoordinate2DMake(yCoord, xCoord);
+                        
         GEOSCoordSeq_getSize_r(handle, sequence, &numberOfCoords);
         GEOSCoordSeq_destroy_r(handle, sequence);
     }
@@ -164,14 +167,15 @@ void log_and_exit(const char *fmt,...) {
     self = [super initWithGeosGeometry:geom];
     if (self) {
         GEOSCoordSequence *sequence = GEOSCoordSeq_clone_r(handle, GEOSGeom_getCoordSeq_r(handle, geosGeom));
-        geometry = [[MKPointAnnotation alloc] init];
         double xCoord;
         GEOSCoordSeq_getX_r(handle, sequence, 0, &xCoord);
         
         double yCoord;
         GEOSCoordSeq_getY_r(handle, sequence, 0, &yCoord);
-        geometry.coordinate = CLLocationCoordinate2DMake(yCoord, xCoord);
-        
+
+        _coords = (CLLocationCoordinate2D *) malloc( sizeof(CLLocationCoordinate2D) );
+        *_coords = CLLocationCoordinate2DMake(yCoord, xCoord);
+
         GEOSCoordSeq_getSize_r(handle, sequence, &numberOfCoords);
         GEOSCoordSeq_destroy_r(handle, sequence);
     }
@@ -188,8 +192,8 @@ void log_and_exit(const char *fmt,...) {
         
         // TODO: Move the destroy into the dealloc method
         // GEOSCoordSeq_destroy(seq);
-        geometry = [[MKPointAnnotation alloc] init];
-        geometry.coordinate = coordinate;
+        _coords = (CLLocationCoordinate2D *) malloc( sizeof(CLLocationCoordinate2D) );
+        *_coords = coordinate;
         
         GEOSWKTWriter *WKTWriter = GEOSWKTWriter_create_r(handle);
         self.wktGeom = [NSString stringWithUTF8String:GEOSWKTWriter_write_r(handle, WKTWriter,geosGeom)];
@@ -204,7 +208,6 @@ void log_and_exit(const char *fmt,...) {
 #pragma mark -
 
 @implementation ShapeKitPolyline
-@synthesize geometry;//,numberOfCoords;
 
 -(id)initWithWKT:(NSString *) wkt {
     self = [super initWithWKT:wkt];
@@ -221,7 +224,8 @@ void log_and_exit(const char *fmt,...) {
             GEOSCoordSeq_getY_r(handle, sequence, coord, &yCoord);
             coords[coord] = CLLocationCoordinate2DMake(yCoord, xCoord);
         }
-        geometry = [MKPolyline polylineWithCoordinates:coords count:numberOfCoords];
+        _coords = (CLLocationCoordinate2D *) malloc( sizeof(CLLocationCoordinate2D) * numberOfCoords );
+        memcpy(_coords, coords, sizeof(CLLocationCoordinate2D) * numberOfCoords );
         
         GEOSCoordSeq_destroy_r(handle, sequence);
     }
@@ -244,8 +248,9 @@ void log_and_exit(const char *fmt,...) {
             GEOSCoordSeq_getY_r(handle, sequence, coord, &yCoord);
             coords[coord] = CLLocationCoordinate2DMake(yCoord, xCoord);
         }
-        geometry = [MKPolyline polylineWithCoordinates:coords count:numberOfCoords];
-        
+        _coords = (CLLocationCoordinate2D *) malloc( sizeof(CLLocationCoordinate2D) * numberOfCoords );
+        memcpy(_coords, coords, sizeof(CLLocationCoordinate2D) * numberOfCoords );
+
         GEOSCoordSeq_destroy_r(handle, sequence);
     }
     return self;
@@ -265,7 +270,8 @@ void log_and_exit(const char *fmt,...) {
         
         // TODO: Move the destroy into the dealloc method
         // GEOSCoordSeq_destroy(seq);
-        geometry = [MKPolyline polylineWithCoordinates:coordinates count:count];
+        _coords = (CLLocationCoordinate2D *) malloc( sizeof(CLLocationCoordinate2D) * numberOfCoords );
+        memcpy(_coords, coordinates, sizeof(CLLocationCoordinate2D) * numberOfCoords );
         
         GEOSWKTWriter *WKTWriter = GEOSWKTWriter_create_r(handle);
         self.wktGeom = [NSString stringWithUTF8String:GEOSWKTWriter_write_r(handle, WKTWriter,geosGeom)];
@@ -280,7 +286,6 @@ void log_and_exit(const char *fmt,...) {
 #pragma mark -
 
 @implementation ShapeKitPolygon
-@synthesize geometry;//,numberOfCoords;
 
 -(id)initWithWKT:(NSString *) wkt {
     self = [super initWithWKT:wkt];
@@ -297,7 +302,8 @@ void log_and_exit(const char *fmt,...) {
             GEOSCoordSeq_getY_r(handle, sequence, coord, &yCoord);
             coords[coord] = CLLocationCoordinate2DMake(yCoord, xCoord);
         }
-        geometry = [MKPolygon polygonWithCoordinates:coords count:numberOfCoords];
+        _coords = (CLLocationCoordinate2D *) malloc( sizeof(CLLocationCoordinate2D) * numberOfCoords );
+        memcpy(_coords, coords, sizeof(CLLocationCoordinate2D) * numberOfCoords );
         
         GEOSCoordSeq_destroy_r(handle, sequence);
     }
@@ -319,7 +325,8 @@ void log_and_exit(const char *fmt,...) {
             GEOSCoordSeq_getY_r(handle, sequence, coord, &yCoord);
             coords[coord] = CLLocationCoordinate2DMake(yCoord, xCoord);
         }
-        geometry = [MKPolygon polygonWithCoordinates:coords count:numberOfCoords];
+        _coords = (CLLocationCoordinate2D *) malloc( sizeof(CLLocationCoordinate2D) * numberOfCoords );
+        memcpy(_coords, coords, sizeof(CLLocationCoordinate2D) * numberOfCoords );
         
         GEOSCoordSeq_destroy_r(handle, sequence);
     }
@@ -340,7 +347,8 @@ void log_and_exit(const char *fmt,...) {
         
         // TODO: Move the destroy into the dealloc method
         // GEOSCoordSeq_destroy(seq);
-        geometry = [MKPolygon polygonWithCoordinates:coordinates count:count];
+        _coords = (CLLocationCoordinate2D *) malloc( sizeof(CLLocationCoordinate2D) * numberOfCoords );
+        memcpy(_coords, coordinates, sizeof(CLLocationCoordinate2D) * numberOfCoords );
         
         GEOSWKTWriter *WKTWriter = GEOSWKTWriter_create_r(handle);
         self.wktGeom = [NSString stringWithUTF8String:GEOSWKTWriter_write_r(handle, WKTWriter,geosGeom)];

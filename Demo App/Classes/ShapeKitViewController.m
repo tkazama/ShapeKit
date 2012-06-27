@@ -8,6 +8,7 @@
 
 #import "ShapeKitViewController.h"
 #import "ShapeKit.h"
+#import "ShapeKit+MapKit.h"
 
 @implementation ShapeKitViewController
 @synthesize theMap;

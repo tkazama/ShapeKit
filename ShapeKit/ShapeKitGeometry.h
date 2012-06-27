@@ -11,9 +11,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 #import <geos_c.h>
 #import <proj_api.h>
-#import <MapKit/MapKit.h>
 
 
 @interface ShapeKitGeometry : NSObject {
@@ -23,6 +23,8 @@
     GEOSGeometry *geosGeom;
     GEOSContextHandle_t handle;
 	unsigned int numberOfCoords;
+    CLLocationCoordinate2D *_coords;
+    id _geometry;
 }
 
 @property (nonatomic) NSString *wktGeom;
@@ -40,34 +42,13 @@ void log_and_exit(const char *fmt,...);
 @end
 
 @interface ShapeKitPoint : ShapeKitGeometry
-{
-    MKPointAnnotation *geometry;
-//    unsigned int numberOfCoords;
-}
-@property (nonatomic) MKPointAnnotation *geometry;
-//@property (nonatomic) unsigned int numberOfCoords;
 -(id)initWithCoordinate:(CLLocationCoordinate2D)coordinate;
-
 @end
 
 @interface ShapeKitPolyline : ShapeKitGeometry
-{
-    MKPolyline *geometry;
-//    unsigned int numberOfCoords;
-}
-@property (nonatomic) MKPolyline *geometry;
-//@property (nonatomic) unsigned int numberOfCoords;
 -(id)initWithCoordinates:(CLLocationCoordinate2D[])coordinates count:(unsigned int)count;
-
 @end
 
 @interface ShapeKitPolygon : ShapeKitGeometry
-{
-    MKPolygon *geometry;
-//    unsigned int numberOfCoords;
-}
-@property (nonatomic) MKPolygon *geometry;
-//@property (nonatomic) unsigned int numberOfCoords;
 -(id)initWithCoordinates:(CLLocationCoordinate2D[])coordinates count:(unsigned int)count;
-
 @end
