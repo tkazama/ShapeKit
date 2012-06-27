@@ -33,6 +33,7 @@
 @property (nonatomic) GEOSGeometry *geosGeom;
 @property (nonatomic) unsigned int numberOfCoords;
 
+- (CLLocationCoordinate2D) coordinateAtIndex: (NSInteger) index;
 -(id)initWithWKT:(NSString *) wkt;
 -(id)initWithGeosGeometry:(GEOSGeometry *)geom;
 -(void) reprojectTo:(NSString *)newProjectionDefinition;
@@ -42,6 +43,7 @@ void log_and_exit(const char *fmt,...);
 @end
 
 @interface ShapeKitPoint : ShapeKitGeometry
+@property (readonly) CLLocationCoordinate2D coordinate;
 -(id)initWithCoordinate:(CLLocationCoordinate2D)coordinate;
 @end
 

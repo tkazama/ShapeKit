@@ -62,6 +62,13 @@
     return self;    
 }
 
+- (CLLocationCoordinate2D) coordinateAtIndex: (NSInteger) index
+{
+    NSAssert ((index > 0) && (index < numberOfCoords), @"Error in ShapeKitGeometry class: index must be smaller than numberOfCoords");
+
+    return _coords[index];
+}
+
 -(void) reprojectTo:(NSString *)newProjectionDefinition {
     // TODO: Impliment this as an SRID int stored on the geom rather than a proj4 string
 	projPJ source, destination;
@@ -202,6 +209,10 @@ void log_and_exit(const char *fmt,...) {
     return self;
 }
 
+-(CLLocationCoordinate2D)coordinate
+{
+    return [self coordinateAtIndex: 0];    
+}
 
 @end
 
