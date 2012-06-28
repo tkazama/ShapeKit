@@ -16,7 +16,7 @@
 #import <proj_api.h>
 
 // Building Blocks : Point, LinearRing
-
+/*
  typedef struct LinearRing   {
  unsigned int  numPoints;
  CLLocationCoordinate2D   points[1];
@@ -109,4 +109,5 @@ void log_and_exit(const char *fmt,...);
 
 @interface ShapeKitPolygon : ShapeKitGeometry
 -(id)initWithCoordinates:(CLLocationCoordinate2D[])coordinates count:(unsigned int)count;
+@property (readonly) NSArray *interiors;
 @end

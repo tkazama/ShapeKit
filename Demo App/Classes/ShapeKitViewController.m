@@ -37,7 +37,7 @@
 	NSDictionary *stupidDict = [NSDictionary dictionaryWithContentsOfFile:path];
 	NSData *geomData = [stupidDict objectForKey:@"shape"];
 	if (geomData && [geomData length]) {
-		poly = [[[ShapeKitPolygon alloc] initWithWKB:[geomData bytes] size:[geomData length]] autorelease];
+		poly = [[ShapeKitPolygon alloc] initWithWKB:[geomData bytes] size:[geomData length]];
 	}
 	return poly;
 }
@@ -145,10 +145,6 @@
     [theMap addAnnotation:[line pointOnSurface].geometry];
     [theMap addAnnotation:[line centroid].geometry];
     
-    [myPoint release];
-    [polygon release];
-    [line release];
-	
 	polygon = [self loadWKBPolygonFromFile:@"PlanID20-82"];
     polygon.geometry.title = @"82";
 	[theMap addOverlay:polygon.geometry];
