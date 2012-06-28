@@ -13,7 +13,6 @@
 #import "ShapeKitGeometry.h"
 #import <geos_c.h>
 
-
 @implementation ShapeKitGeometry
 @synthesize wktGeom,geomType, projDefinition ,geosGeom, numberOfCoords;
 
@@ -28,6 +27,23 @@
     }
     return self;
 }
+
+-(id)initWithWKB:(const unsigned char *) wkb size:(size_t)wkb_size {
+    [self init];
+    
+    GEOSWKBReader *WKBReader = GEOSWKBReader_create_r(handle);
+    self.geosGeom = GEOSWKBReader_read_r(handle, WKBReader, wkb, wkb_size);
+    GEOSWKBReader_destroy_r(handle, WKBReader);
+    
+    self.geomType = [NSString stringWithUTF8String:GEOSGeomType_r(handle, geosGeom)];
+    
+    GEOSWKTWriter *WKTWriter = GEOSWKTWriter_create_r(handle);
+    self.wktGeom = [NSString stringWithUTF8String:GEOSWKTWriter_write_r(handle, WKTWriter,geosGeom)];
+    GEOSWKTWriter_destroy_r(handle, WKTWriter);
+    
+    return self;
+}
+
 
 
 -(id)initWithWKT:(NSString *) wkt {
@@ -47,7 +63,6 @@
     
     return self;
 }
-
 
 -(id)initWithGeosGeometry:(GEOSGeometry *)geom {
     self = [self init];
@@ -220,6 +235,27 @@ void log_and_exit(const char *fmt,...) {
 
 @implementation ShapeKitPolyline
 
+-(id)initWithWKB:(const unsigned char *) wkb size:(size_t)wkb_size{
+    [super initWithWKB:wkb size:wkb_size];
+    GEOSCoordSequence *sequence = GEOSCoordSeq_clone_r(handle, GEOSGeom_getCoordSeq_r(handle, geosGeom));
+    GEOSCoordSeq_getSize_r(handle, sequence, &numberOfCoords);
+    CLLocationCoordinate2D coords[numberOfCoords];
+    
+    for (int coord = 0; coord < numberOfCoords; coord++) {
+        double xCoord = NULL;
+        GEOSCoordSeq_getX_r(handle, sequence, coord, &xCoord);
+        
+        double yCoord = NULL;
+        GEOSCoordSeq_getY_r(handle, sequence, coord, &yCoord);
+        coords[coord] = CLLocationCoordinate2DMake(yCoord, xCoord);
+    }
+    geometry = [MKPolyline polylineWithCoordinates:coords count:numberOfCoords];
+
+    GEOSCoordSeq_destroy_r(handle, sequence);
+    
+    return self;
+}
+
 -(id)initWithWKT:(NSString *) wkt {
     self = [super initWithWKT:wkt];
     if (self) {
@@ -297,6 +333,56 @@ void log_and_exit(const char *fmt,...) {
 #pragma mark -
 
 @implementation ShapeKitPolygon
+
+-(id)initWithWKB:(const unsigned char *) wkb size:(size_t)wkb_size{
+	size_t length = wkb_size;
+	
+    [super initWithWKB:wkb size:length];
+	GEOSCoordSequence *sequence = nil;
+	
+	int numInteriorRings = GEOSGetNumInteriorRings_r(handle, geosGeom);
+	NSMutableArray *interiors = [[NSMutableArray alloc] init];
+	int interiorIndex = 0;
+	for (interiorIndex = 0; interiorIndex< numInteriorRings; interiorIndex++) {
+		const GEOSGeometry *interior = GEOSGetInteriorRingN_r(handle, geosGeom, interiorIndex);
+	    sequence = GEOSCoordSeq_clone_r(handle, GEOSGeom_getCoordSeq_r(handle, interior));
+		unsigned int numCoordsInt = 0;
+	    GEOSCoordSeq_getSize_r(handle, sequence, &numCoordsInt); 
+		CLLocationCoordinate2D coordsInt[numCoordsInt];
+	    for (int coord = 0; coord < numCoordsInt; coord++) {
+	        double xCoord = NULL;
+			
+	        GEOSCoordSeq_getX_r(handle, sequence, coord, &xCoord);
+
+	        double yCoord = NULL;
+	        GEOSCoordSeq_getY_r(handle, sequence, coord, &yCoord);
+	        coordsInt[coord] = CLLocationCoordinate2DMake(yCoord, xCoord);
+	    }
+	    [interiors addObject:[MKPolygon polygonWithCoordinates:coordsInt count:numCoordsInt]];
+	    GEOSCoordSeq_destroy_r(handle, sequence);		
+	}
+	const GEOSGeometry *exterior = GEOSGetExteriorRing_r(handle, geosGeom);
+    sequence = GEOSCoordSeq_clone_r(handle, GEOSGeom_getCoordSeq_r(handle, exterior));
+    GEOSCoordSeq_getSize_r(handle, sequence, &numberOfCoords);
+    CLLocationCoordinate2D coordsExt[numberOfCoords];
+    for (int coord = 0; coord < numberOfCoords; coord++) {
+        double xCoord = NULL;
+        GEOSCoordSeq_getX_r(handle, sequence, coord, &xCoord);
+        
+        double yCoord = NULL;
+        GEOSCoordSeq_getY_r(handle, sequence, coord, &yCoord);
+        coordsExt[coord] = CLLocationCoordinate2DMake(yCoord, xCoord);
+    }
+	if ([interiors count])
+    	geometry = [MKPolygon polygonWithCoordinates:coordsExt count:numberOfCoords interiorPolygons:interiors];
+	else
+    	geometry = [MKPolygon polygonWithCoordinates:coordsExt count:numberOfCoords];
+    
+    GEOSCoordSeq_destroy_r(handle, sequence);
+	[interiors release];
+    
+    return self;
+}
 
 -(id)initWithWKT:(NSString *) wkt {
     self = [super initWithWKT:wkt];

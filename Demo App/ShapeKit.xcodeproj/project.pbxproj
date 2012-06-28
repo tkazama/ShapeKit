@@ -17,6 +17,9 @@
 		28D7ACF80DDB3853001CB0EB /* ShapeKitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* ShapeKitViewController.m */; };
 		CDDB1DD4159B4EBE00EC2DC4 /* ShapeKit+MapKit.m in Sources */ = {isa = PBXBuildFile; fileRef = CDDB1DD3159B4EBD00EC2DC4 /* ShapeKit+MapKit.m */; };
 		CDDB1DD6159B511A00EC2DC4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDB1DD5159B511A00EC2DC4 /* MapKit.framework */; };
+		37294FD213668095006C6558 /* PlanID20-82.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37294FCF13668095006C6558 /* PlanID20-82.plist */; };
+		37294FD313668095006C6558 /* PlanID20-83.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37294FD013668095006C6558 /* PlanID20-83.plist */; };
+		37294FD413668095006C6558 /* PlanID20-84.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37294FD113668095006C6558 /* PlanID20-84.plist */; };
 		CE1415521321938600FA3325 /* libgeos_c.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE14154F1321938600FA3325 /* libgeos_c.a */; };
 		CE1415531321938600FA3325 /* libgeos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1415501321938600FA3325 /* libgeos.a */; };
 		CE1415541321938600FA3325 /* libproj.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1415511321938600FA3325 /* libproj.a */; };
@@ -39,6 +42,9 @@
 		28D7ACF70DDB3853001CB0EB /* ShapeKitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShapeKitViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* ShapeKit_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShapeKit_Prefix.pch; sourceTree = "<group>"; };
+		37294FCF13668095006C6558 /* PlanID20-82.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "PlanID20-82.plist"; sourceTree = "<group>"; };
+		37294FD013668095006C6558 /* PlanID20-83.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "PlanID20-83.plist"; sourceTree = "<group>"; };
+		37294FD113668095006C6558 /* PlanID20-84.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "PlanID20-84.plist"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* ShapeKit-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ShapeKit-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		CDDB1DD2159B4EBD00EC2DC4 /* ShapeKit+MapKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ShapeKit+MapKit.h"; sourceTree = "<group>"; };
 		CDDB1DD3159B4EBD00EC2DC4 /* ShapeKit+MapKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ShapeKit+MapKit.m"; sourceTree = "<group>"; };
@@ -127,6 +133,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				37294FCF13668095006C6558 /* PlanID20-82.plist */,
+				37294FD013668095006C6558 /* PlanID20-83.plist */,
+				37294FD113668095006C6558 /* PlanID20-84.plist */,
 				2899E5210DE3E06400AC0155 /* ShapeKitViewController.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* ShapeKit-Info.plist */,
@@ -203,6 +212,9 @@
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				2899E5220DE3E06400AC0155 /* ShapeKitViewController.xib in Resources */,
+				37294FD213668095006C6558 /* PlanID20-82.plist in Resources */,
+				37294FD313668095006C6558 /* PlanID20-83.plist in Resources */,
+				37294FD413668095006C6558 /* PlanID20-84.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
