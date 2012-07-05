@@ -10,6 +10,8 @@
 #import "ShapeKit.h"
 #import "ShapeKit+MapKit.h"
 
+#import "NSString+HexToData.h"
+
 @implementation ShapeKitViewController
 @synthesize theMap;
 
@@ -146,18 +148,32 @@
     [theMap addAnnotation:[line pointOnSurface].geometry];
     [theMap addAnnotation:[line centroid].geometry];
 
-    ShapeKitGeometry *wkbPoint = [self loadWKBGeometryFromFile:@"PlanID20-82"];
-    wkbPoint.geometry.title = @"82";
-	[theMap addOverlay: wkbPoint.geometry];
+    ShapeKitGeometry *wkbPolygon = [self loadWKBGeometryFromFile: @"PlanID20-82"];
+    wkbPolygon.geometry.title = @"82";
+	[theMap addOverlay: wkbPolygon.geometry];
 
-/*    ShapeKitGeometry *wkbLine = [self loadWKBGeometryFromFile:@"PlanID20-85"];
-    wkbLine.geometry.title = @"82";
-	[theMap addOverlay:wkbLine.geometry];*/
-
-	ShapeKitGeometry *wkbPolygon = [self loadWKBGeometryFromFile: @"PlanID20-83"];
+    wkbPolygon = [self loadWKBGeometryFromFile: @"PlanID20-83"];
     wkbPolygon.geometry.title = @"83";
 	[theMap addOverlay: wkbPolygon.geometry];
+
+    wkbPolygon = [self loadWKBGeometryFromFile: @"PlanID20-84"];
+    wkbPolygon.geometry.title = @"84";
+	[theMap addOverlay: wkbPolygon.geometry];
 	
+/*    NSString *pointString = @"01010000A032BF0D001F5DAEA5C3922340F0A9CA21F60247400000000000309240";
+    NSData *geomData = [pointString hexToData];
+    ShapeKitGeometry *wkbPoint = [[ShapeKitFactory defaultFactory] geometryWithWKB: geomData];
+    wkbPoint.geometry.title = @"85";
+	[theMap addOverlay: wkbPoint.geometry];*/
+    
+    NSString *lineString = @"0102000020E61000002300000007E51089AEA52140103C6E37D7BC46402BECAA6F70A62140111E7D9BE5BC464043656D0049A82140D7DF79A20CBD46408076F4A2CBAA21402D0F98FE44BD4640D89ABC8C2BAC21406A28B75A62BD4640428C8DF88DAD2140F5320B8A82BD46409283A90F36AF21401E169089AABD4640374C3329DFB32140D2F1C0BB15BE4640325F0CFABCB62140FB8661B757BE46400AAD81574CB7214034F91BF864BE4640530A762779B82140C437515680BE4640AECA986EBCB92140BC12FCF69BBE46401F10595FD9BA2140D82C40BBB1BE4640A9688E4C9FBC214088A61DB5CBBE4640987E6C61BDBE2140B154DDC6E6BE4640C3B7E1992EC12140BBC1061800BF46409A3D191D64C32140502F4E7619BF4640DE1C6E01C8C52140C239994B37BF4640588EBA02ECC621404C13F93146BF4640F94D134B36C92140CA0E81D760BF4640CE519C255CCA2140821479576DBF46408A72C98782CB21408BFE79EE78BF46406F9E9222D2CD21409D16D9FE8FBF46406797643F24D02140DBC5325BA4BF4640C9B3123F25D22140538BB144B4BF46403541C04EF5D621408E3468F5D7BF4640B7F127306EDE2140721B221909C0464041EF5994D8E02140091AF8C118C046403C62244A44E321401B47D57B29C04640950BEEB4CCE4214057788BCA33C046409FAD260BF6E721403932C99946C04640B40F83511AEA2140F1EECEE653C0464011F8FF2E46F02140945B112B74C0464043089BC1C9F62140C4BDF76596C046407C840FC3EFF8214082C51CAB9DC04640";
+    NSData *geomData = [lineString hexToData];
+    ShapeKitGeometry *wkbLine = [[ShapeKitFactory defaultFactory] geometryWithWKB: geomData];
+    wkbLine.geometry.title = @"A4 Bergamo-Milano";
+
+	[theMap addOverlay: wkbLine.geometry];
+    
+
 }
 
 

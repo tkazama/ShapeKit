@@ -19,6 +19,7 @@
 		37294FD313668095006C6558 /* PlanID20-83.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37294FD013668095006C6558 /* PlanID20-83.plist */; };
 		37294FD413668095006C6558 /* PlanID20-84.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37294FD113668095006C6558 /* PlanID20-84.plist */; };
 		CD3498C115A5A60C00860557 /* ShapeKitFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = CD3498C015A5A60C00860557 /* ShapeKitFactory.m */; };
+		CDB8DEAC15A5E32200F32A65 /* NSString+HexToData.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8DEAB15A5E32200F32A65 /* NSString+HexToData.m */; };
 		CDDB1DD4159B4EBE00EC2DC4 /* ShapeKit+MapKit.m in Sources */ = {isa = PBXBuildFile; fileRef = CDDB1DD3159B4EBD00EC2DC4 /* ShapeKit+MapKit.m */; };
 		CDDB1DD6159B511A00EC2DC4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDB1DD5159B511A00EC2DC4 /* MapKit.framework */; };
 		CE1415521321938600FA3325 /* libgeos_c.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE14154F1321938600FA3325 /* libgeos_c.a */; };
@@ -49,6 +50,8 @@
 		8D1107310486CEB800E47090 /* ShapeKit-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ShapeKit-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		CD3498BF15A5A60C00860557 /* ShapeKitFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShapeKitFactory.h; path = ../../ShapeKit/ShapeKitFactory.h; sourceTree = "<group>"; };
 		CD3498C015A5A60C00860557 /* ShapeKitFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShapeKitFactory.m; path = ../../ShapeKit/ShapeKitFactory.m; sourceTree = "<group>"; };
+		CDB8DEAA15A5E32200F32A65 /* NSString+HexToData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HexToData.h"; sourceTree = "<group>"; };
+		CDB8DEAB15A5E32200F32A65 /* NSString+HexToData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HexToData.m"; sourceTree = "<group>"; };
 		CDDB1DD2159B4EBD00EC2DC4 /* ShapeKit+MapKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ShapeKit+MapKit.h"; sourceTree = "<group>"; };
 		CDDB1DD3159B4EBD00EC2DC4 /* ShapeKit+MapKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ShapeKit+MapKit.m"; sourceTree = "<group>"; };
 		CDDB1DD5159B511A00EC2DC4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -102,6 +105,8 @@
 				1D3623250D0F684500981E51 /* ShapeKitAppDelegate.m */,
 				28D7ACF60DDB3853001CB0EB /* ShapeKitViewController.h */,
 				28D7ACF70DDB3853001CB0EB /* ShapeKitViewController.m */,
+				CDB8DEAA15A5E32200F32A65 /* NSString+HexToData.h */,
+				CDB8DEAB15A5E32200F32A65 /* NSString+HexToData.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -238,6 +243,7 @@
 				CE14174413219E1400FA3325 /* ShapeKitGeometry+Topology.m in Sources */,
 				CDDB1DD4159B4EBE00EC2DC4 /* ShapeKit+MapKit.m in Sources */,
 				CD3498C115A5A60C00860557 /* ShapeKitFactory.m in Sources */,
+				CDB8DEAC15A5E32200F32A65 /* NSString+HexToData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
