@@ -13,6 +13,11 @@
 #import <MapKit/MapKit.h>
 #import "ShapeKitGeometry.h"
 
+@interface ShapeKitGeometry (MapKit)
+@property (readonly) MKShape *geometry;
+
+@end
+
 @interface ShapeKitPoint (MapKit)
 @property (readonly) MKPointAnnotation *geometry;
 
