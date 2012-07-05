@@ -77,6 +77,18 @@
     return self;    
 }
 
+-(NSString *)description
+{
+    NSMutableString *pointsList = [[NSMutableString alloc] init];
+    CLLocationCoordinate2D* curCoords=NULL;
+    for (int i=0;i<self.numberOfCoords;i++)
+    {
+        curCoords = _coords+i;
+        [pointsList appendFormat:@"[%.4f, %.4f] ", curCoords->latitude,curCoords->longitude]; 
+    }
+    return [[super description] stringByAppendingFormat: @"%@", pointsList];
+}
+
 - (CLLocationCoordinate2D) coordinateAtIndex: (NSInteger) index
 {
     NSAssert ((index > 0) && (index < numberOfCoords), @"Error in ShapeKitGeometry class: index must be smaller than numberOfCoords");
