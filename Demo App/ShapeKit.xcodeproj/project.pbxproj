@@ -47,8 +47,8 @@
 		37294FD013668095006C6558 /* PlanID20-83.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "PlanID20-83.plist"; sourceTree = "<group>"; };
 		37294FD113668095006C6558 /* PlanID20-84.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "PlanID20-84.plist"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* ShapeKit-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ShapeKit-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
-		CD3498BF15A5A60C00860557 /* ShapeKitFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShapeKitFactory.h; sourceTree = "<group>"; };
-		CD3498C015A5A60C00860557 /* ShapeKitFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShapeKitFactory.m; sourceTree = "<group>"; };
+		CD3498BF15A5A60C00860557 /* ShapeKitFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShapeKitFactory.h; path = ../../ShapeKit/ShapeKitFactory.h; sourceTree = "<group>"; };
+		CD3498C015A5A60C00860557 /* ShapeKitFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShapeKitFactory.m; path = ../../ShapeKit/ShapeKitFactory.m; sourceTree = "<group>"; };
 		CDDB1DD2159B4EBD00EC2DC4 /* ShapeKit+MapKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ShapeKit+MapKit.h"; sourceTree = "<group>"; };
 		CDDB1DD3159B4EBD00EC2DC4 /* ShapeKit+MapKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ShapeKit+MapKit.m"; sourceTree = "<group>"; };
 		CDDB1DD5159B511A00EC2DC4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };

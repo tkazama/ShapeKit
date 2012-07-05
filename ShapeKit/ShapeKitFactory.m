@@ -48,14 +48,30 @@
 #pragma mark -Convenience methods
 - (Class )classForGeometry: (GEOSGeometry *)geosGeom
 {
-    NSString *geomType = [NSString stringWithUTF8String: GEOSGeomType_r(handle, geosGeom)];
+    int geomTypeID = GEOSGeomTypeId_r(handle, geosGeom);
     Class geomClass = nil;
-    if ([geomType isEqualToString:@"Polygon"])
-        geomClass = [ShapeKitPolygon class];
-    else if ([geomType isEqualToString:@"Point"])
-        geomClass = [ShapeKitPoint class];
-    else if ([geomType isEqualToString:@"Polyline"])
-        geomClass = [ShapeKitPolyline class];
+    switch (geomTypeID)
+    {
+        case GEOS_POINT:
+            geomClass = [ShapeKitPoint class];
+            break;
+        case GEOS_LINESTRING:
+            geomClass = [ShapeKitPolyline class];
+            break;
+        case GEOS_LINEARRING:
+            break;
+        case GEOS_POLYGON:
+            geomClass = [ShapeKitPolygon class];
+            break;
+        case GEOS_MULTIPOINT:
+            break;
+        case GEOS_MULTILINESTRING:
+            break;
+        case GEOS_MULTIPOLYGON:
+            break;
+        case GEOS_GEOMETRYCOLLECTION:
+            break;
+    }
 
     return geomClass;
 }
