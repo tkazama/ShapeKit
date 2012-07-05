@@ -91,7 +91,7 @@
 
 - (CLLocationCoordinate2D) coordinateAtIndex: (NSInteger) index
 {
-    NSAssert ((index > 0) && (index < numberOfCoords), @"Error in ShapeKitGeometry class: index must be smaller than numberOfCoords");
+    NSAssert ((index >= 0) && (index < numberOfCoords), @"Error in ShapeKitGeometry class: index must be smaller than numberOfCoords");
 
     return _coords[index];
 }
