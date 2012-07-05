@@ -10,6 +10,7 @@
 // See the COPYING file for more information.
 //
 
+#import "ShapeKitFactory.h"
 #import "ShapeKitGeometry.h"
 #import "ShapeKitGeometry+Predicates.h"
 #import "ShapeKitGeometry+Topology.h"

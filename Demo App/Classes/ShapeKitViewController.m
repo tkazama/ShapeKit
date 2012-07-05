@@ -37,7 +37,10 @@
 	NSDictionary *stupidDict = [NSDictionary dictionaryWithContentsOfFile:path];
 	NSData *geomData = [stupidDict objectForKey:@"shape"];
 	if (geomData && [geomData length]) {
-		poly = [[ShapeKitPolygon alloc] initWithWKB:[geomData bytes] size:[geomData length]];
+		// poly = [[ShapeKitPolygon alloc] initWithWKB:[geomData bytes] size:[geomData length]];
+        ShapeKitGeometry *geometry = [[ShapeKitFactory defaultFactory] geometryWithWKB: geomData];
+        if ([geometry isKindOfClass: [ShapeKitPolygon class]])
+            poly = (ShapeKitPolygon *)geometry;
 	}
 	return poly;
 }
