@@ -3,16 +3,16 @@
 mkdir -p ../ShapeKit/libs/
 
 echo "Downlaoding GEOS source..."
-curl -O "http://download.osgeo.org/geos/geos-3.2.2.tar.bz2"
+#curl -O "http://download.osgeo.org/geos/geos-3.3.5.tar.bz2"
 
 echo "Unpacking GEOS source..."
-tar jxf geos-3.2.2.tar.bz2
+tar jxf geos-3.3.5.tar.bz2
 
 echo "Copying build script to GEOS source directory..."
-cp build_ios geos-3.2.2
+cp build_ios geos-3.3.5
 
 echo "Building GEOS..."
-cd geos-3.2.2
+cd geos-3.3.5
 sh build_ios -p $PWD/device_build device
 make clean
 sh build_ios -p $PWD/simulator_build simulator
@@ -22,16 +22,16 @@ cp -r simulator_build/include/* ../../ShapeKit/libs
 cd ..
 
 echo "Downloading PROJ4 source..."
-curl -O http://download.osgeo.org/proj/proj-4.7.0.tar.gz
+curl -O http://download.osgeo.org/proj/proj-4.8.0.tar.gz
 
 echo "Unpacking PROJ4 source..."
-tar zxf proj-4.7.0.tar.gz
+tar zxf proj-4.8.0.tar.gz
 
 echo "Copying build script to PROJ4 source directory..."
-cp build_ios proj-4.7.0
+cp build_ios proj-4.8.0
 
 echo "building PROJ4"
-cd proj-4.7.0
+cd proj-4.8.0
 sh build_ios -p $PWD/device_build device
 make clean
 sh build_ios -p $PWD/simulator_build simulator
