@@ -3,7 +3,7 @@
 mkdir -p ../ShapeKit/libs/
 
 echo "Downlaoding GEOS source..."
-#curl -O "http://download.osgeo.org/geos/geos-3.3.5.tar.bz2"
+curl -O "http://download.osgeo.org/geos/geos-3.3.5.tar.bz2"
 
 echo "Unpacking GEOS source..."
 tar jxf geos-3.3.5.tar.bz2
