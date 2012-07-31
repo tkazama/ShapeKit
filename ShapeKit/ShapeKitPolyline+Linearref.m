@@ -36,5 +36,9 @@
     return [[ShapeKitPoint alloc] initWithGeosGeometry: GEOSInterpolateNormalized_r(handle, geosGeom, fraction)];
 }
 
+- (ShapeKitPoint *) middlePoint
+{
+    return [self interpolatePointAtNormalizedDistance: 0.5];
+}
 
 @end

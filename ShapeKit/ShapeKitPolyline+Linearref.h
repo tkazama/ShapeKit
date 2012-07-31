@@ -22,4 +22,6 @@
 - (ShapeKitPoint *) interpolatePointAtNormalizedDistance: (double) fraction;
 
 
+- (ShapeKitPoint *) middlePoint;
+
 @end
