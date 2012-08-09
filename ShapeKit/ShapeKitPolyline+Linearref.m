@@ -15,12 +15,12 @@
 @implementation ShapeKitPolyline (Linearref)
 
 // Return distance of point projected on line
-- (double) distanceFromProjectionOfPoint: (ShapeKitPoint *)point
+- (double) distanceFromOriginToProjectionOfPoint: (ShapeKitPoint *)point
 {
     return GEOSProject_r(handle, geosGeom, point.geosGeom);
 }
 
-- (double) normalizedDistanceFromProjectionOfPoint: (ShapeKitPoint *)point
+- (double) normalizedDistanceFromOriginToProjectionOfPoint: (ShapeKitPoint *)point
 {
     return GEOSProjectNormalized_r(handle, geosGeom, point.geosGeom);    
 }

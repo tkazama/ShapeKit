@@ -14,8 +14,8 @@
 @interface ShapeKitPolyline (Linearref)
 
 // Return distance of point projected on line
-- (double) distanceFromProjectionOfPoint: (ShapeKitPoint *)point;
-- (double) normalizedDistanceFromProjectionOfPoint: (ShapeKitPoint *)point;
+- (double) distanceFromOriginToProjectionOfPoint: (ShapeKitPoint *)point;
+- (double) normalizedDistanceFromOriginToProjectionOfPoint: (ShapeKitPoint *)point;
 
 // Return closest point to given distance within geometry 
 - (ShapeKitPoint *) interpolatePointAtDistance: (double) distance;
