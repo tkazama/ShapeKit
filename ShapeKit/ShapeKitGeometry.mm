@@ -16,7 +16,7 @@
 @implementation ShapeKitGeometry
 @synthesize wktGeom,geomType, projDefinition ,geosGeom, numberOfCoords;
 
-#pragma mark ShapeKitPoint init and dealloc methods
+#pragma mark ShapeKitGeometry init and dealloc methods
 - (id) init
 {
     self = [super init];
@@ -217,21 +217,27 @@ void log_and_exit(const char *fmt,...) {
 }
 
 -(id)initWithCoordinate:(CLLocationCoordinate2D)coordinate {
-    self = [super init];
+    self = [self init];
     if (self) {
+                
         GEOSCoordSequence *seq = GEOSCoordSeq_create_r(handle, 1,2);
-        GEOSCoordSeq_setX_r(handle, seq, coordinate.longitude, 0);
-        GEOSCoordSeq_setY_r(handle, seq, coordinate.latitude, 0);
-        self.geosGeom = GEOSGeom_createPoint_r(handle, seq);
+        GEOSCoordSeq_setX_r(handle, seq, 0, coordinate.longitude);
+        GEOSCoordSeq_setY_r(handle, seq, 0, coordinate.latitude);
+        GEOSGeometry *newGeosGeom = GEOSGeom_createPoint_r(handle, seq);
+        NSAssert (newGeosGeom != NULL, @"Error creating ShapeKitPoint");
+        geosGeom=newGeosGeom;
         
         // TODO: Move the destroy into the dealloc method
         // GEOSCoordSeq_destroy(seq);
+        
         _coords = (CLLocationCoordinate2D *) malloc( sizeof(CLLocationCoordinate2D) );
         *_coords = coordinate;
         
         GEOSWKTWriter *WKTWriter = GEOSWKTWriter_create_r(handle);
-        self.wktGeom = [NSString stringWithUTF8String:GEOSWKTWriter_write_r(handle, WKTWriter,geosGeom)];
-        GEOSWKTWriter_destroy_r(handle, WKTWriter);
+        char *wktString = GEOSWKTWriter_write_r(handle, WKTWriter, newGeosGeom);
+        self.wktGeom = [NSString stringWithUTF8String: wktString];
+        GEOSWKTWriter_destroy_r(handle, WKTWriter);        
+        
     }    
     return self;
 }
@@ -319,7 +325,7 @@ void log_and_exit(const char *fmt,...) {
 }
 
 -(id)initWithCoordinates:(CLLocationCoordinate2D[])coordinates count:(unsigned int)count {
-    self = [super init];
+    self = [self init];
     if (self) {
         GEOSCoordSequence *seq = GEOSCoordSeq_create_r(handle, count,2);
         
@@ -452,7 +458,7 @@ void log_and_exit(const char *fmt,...) {
 }
 
 -(id)initWithCoordinates:(CLLocationCoordinate2D[])coordinates count:(unsigned int)count {
-    self = [super init];
+    self = [self init];
     if (self) {
         GEOSCoordSequence *seq = GEOSCoordSeq_create_r(handle, count,2);
         
