@@ -13,6 +13,8 @@
 #import "ShapeKitFactory.h"
 #import "ShapeKit.h"
 
+#import <geos_c.h>
+
 @interface ShapeKitFactory () {
     GEOSContextHandle_t handle;
 

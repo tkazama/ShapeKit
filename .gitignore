@@ -2,9 +2,8 @@
 *.swp
 *~.nib
 
-build/
-lib_src/geos*
-lib_src/proj*
+Libraries/src
+Libraries/libs
 
 xcuserdata
 *.pbxuser

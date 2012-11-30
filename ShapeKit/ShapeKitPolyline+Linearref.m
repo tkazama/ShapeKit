@@ -11,29 +11,30 @@
 
 
 #import "ShapeKitPolyline+Linearref.h"
+#import "ShapeKitPrivateInterface.h"
 
 @implementation ShapeKitPolyline (Linearref)
 
 // Return distance of point projected on line
 - (double) distanceFromOriginToProjectionOfPoint: (ShapeKitPoint *)point
 {
-    return GEOSProject_r(handle, geosGeom, point.geosGeom);
+    return GEOSProject_r(self.handle, self.geosGeom, point.geosGeom);
 }
 
 - (double) normalizedDistanceFromOriginToProjectionOfPoint: (ShapeKitPoint *)point
 {
-    return GEOSProjectNormalized_r(handle, geosGeom, point.geosGeom);    
+    return GEOSProjectNormalized_r(self.handle, self.geosGeom, point.geosGeom);
 }
 
 // Return closest point to given distance within geometry 
 - (ShapeKitPoint *) interpolatePointAtDistance: (double) distance
 {
-    return [[ShapeKitPoint alloc] initWithGeosGeometry: GEOSInterpolate_r(handle, geosGeom, distance)];
+    return [[ShapeKitPoint alloc] initWithGeosGeometry: GEOSInterpolate_r(self.handle, self.geosGeom, distance)];
 }
 
 - (ShapeKitPoint *) interpolatePointAtNormalizedDistance: (double) fraction
 {
-    return [[ShapeKitPoint alloc] initWithGeosGeometry: GEOSInterpolateNormalized_r(handle, geosGeom, fraction)];
+    return [[ShapeKitPoint alloc] initWithGeosGeometry: GEOSInterpolateNormalized_r(self.handle, self.geosGeom, fraction)];
 }
 
 - (ShapeKitPoint *) middlePoint

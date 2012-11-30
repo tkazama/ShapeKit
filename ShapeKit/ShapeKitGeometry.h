@@ -12,86 +12,21 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
-#import <geos_c.h>
-#import <proj_api.h>
 
-// Building Blocks : Point, LinearRing
-/*
- typedef struct LinearRing   {
- unsigned int  numPoints;
- CLLocationCoordinate2D   points[1];
- } LinearRing;
- 
- enum wkbGeometryType {
- wkbPoint = 1,
- wkbLineString = 2,
- wkbPolygon = 3,
- wkbMultiPoint = 4,
- wkbMultiLineString = 5,
- wkbMultiPolygon = 6
- };
- 
- enum wkbByteOrder {
- wkbXDR = 0,     // Big Endian
- wkbNDR = 1     // Little Endian
- };
- 
- typedef struct WKBPoint {
- unsigned char   byteOrder;
- unsigned int   wkbType;     // 1=wkbPoint
- CLLocationCoordinate2D    point;
- } WKBPoint;
- 
- typedef struct WKBLineString {
- unsigned char     byteOrder;
- unsigned int   wkbType;     // 2=wkbLineString
- unsigned int   numPoints;
- CLLocationCoordinate2D    points[1];
- } WKBLineString;
- 
- typedef struct WKBPolygon    {
- unsigned char                byteOrder;
- unsigned int        wkbType;     // 3=wkbPolygon
- unsigned int        numRings;
- LinearRing        rings[1];
- } WKBPolygon ;
- 
- typedef struct WKBMultiPoint    {
- unsigned char                byteOrder;
- unsigned int            wkbType;     // 4=wkbMultipoint
- unsigned int            num_wkbPoints;
- WKBPoint            WKBPoints[1];
- } WKBMultiPoint;
- 
- typedef struct WKBMultiLineString    {
- unsigned char              byteOrder;
- unsigned int            wkbType;     // 5=wkbMultiLineString
- unsigned int            num_wkbLineStrings;
- WKBLineString     WKBLineStrings[1];
- } WKBMultiLineString;
- */
 
-@interface ShapeKitGeometry : NSObject {
-    NSString *wktGeom;
-    NSString *geomType;
-	NSString *projDefinition;
-    GEOSGeometry *geosGeom;
-    GEOSContextHandle_t handle;
-	unsigned int numberOfCoords;
-    CLLocationCoordinate2D *_coords;
-    id _geometry;
-}
+@interface ShapeKitGeometry : NSObject
 
-@property (nonatomic) NSString *wktGeom;
-@property (nonatomic) NSString *geomType;
-@property (nonatomic) NSString *projDefinition;
-@property (nonatomic) GEOSGeometry *geosGeom;
-@property (nonatomic) unsigned int numberOfCoords;
+@property (readonly, copy) NSString *wktGeom;
+@property (readonly, copy) NSString *geomType;
+@property (readonly, copy) NSString *projDefinition;
+@property (readonly) void *handle;
+@property (readonly, nonatomic) unsigned int numberOfCoords;
 
-- (CLLocationCoordinate2D) coordinateAtIndex: (NSInteger) index;
+
+-(CLLocationCoordinate2D) coordinateAtIndex: (NSInteger) index;
 -(id)initWithWKB:(const unsigned char *) wkb size:(size_t)wkb_size;
 -(id)initWithWKT:(NSString *) wkt;
--(id)initWithGeosGeometry:(GEOSGeometry *)geom;
+-(id)initWithGeosGeometry:(void *)geom;
 -(void) reprojectTo:(NSString *)newProjectionDefinition;
 void notice(const char *fmt,...);
 void log_and_exit(const char *fmt,...);
