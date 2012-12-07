@@ -92,13 +92,13 @@
     return self;
 }
 
--(id)initWithGeosGeometry:(GEOSGeometry *)geom {
+-(id)initWithGeosGeometry:(void *)geom {
     self = [self init];
     if (self)
     {
         GEOSContextHandle_t handle = (GEOSContextHandle_t)_handle;
 
-        _geosGeom = geom;
+        _geosGeom = (GEOSGeometry *)geom;
         self.geomType = [NSString stringWithUTF8String:GEOSGeomType_r(handle, _geosGeom)];
         GEOSWKTWriter *WKTWriter = GEOSWKTWriter_create_r(handle);
         self.wktGeom = [NSString stringWithUTF8String:GEOSWKTWriter_write_r(handle, WKTWriter, _geosGeom)];
@@ -242,7 +242,7 @@ void log_and_exit(const char *fmt,...) {
     return self;
 }
 
--(id)initWithGeosGeometry:(GEOSGeometry *)geom {
+-(id)initWithGeosGeometry:(void *)geom {
     self = [super initWithGeosGeometry:geom];
     if (self) {
         GEOSContextHandle_t handle = (GEOSContextHandle_t)_handle;
@@ -350,7 +350,7 @@ void log_and_exit(const char *fmt,...) {
     return self;
 }
 
--(id)initWithGeosGeometry:(GEOSGeometry *)geom {
+-(id)initWithGeosGeometry:(void *)geom {
     self = [super initWithGeosGeometry:geom];
     if (self) {
         GEOSCoordSequence *sequence = GEOSCoordSeq_clone_r(_handle, GEOSGeom_getCoordSeq_r(_handle, _geosGeom));
@@ -490,7 +490,7 @@ void log_and_exit(const char *fmt,...) {
     return self;
 }
 
--(id)initWithGeosGeometry:(GEOSGeometry *)geom {
+-(id)initWithGeosGeometry:(void *)geom {
     self = [super initWithGeosGeometry: geom];
     if (self) {
         
