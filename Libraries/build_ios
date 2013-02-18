@@ -33,8 +33,8 @@ set -u
 
 
 default_gcc_version=4.2
-default_iphoneos_version=6.0
-default_macos_version=10.7
+default_iphoneos_version=6.1
+default_macos_version=10.8
 
 GCC_VERSION="${GCC_VERSION:-$default_gcc_version}"
 export IPHONEOS_DEPLOYMENT_TARGET="${IPHONEOS_DEPLOYMENT_TARGET:-$default_iphoneos_version}"
@@ -110,7 +110,7 @@ export CC="/usr/bin/clang"
 export CFLAGS="-arch ${arch} -pipe -Os -gdwarf-2 -isysroot ${platform_sdk_dir} ${extra_cflags}"
 export LDFLAGS="-arch ${arch} -isysroot ${platform_sdk_dir}"
 export CXX="/usr/bin/clang++"
-export CXXFLAGS="${CFLAGS}"
+export CXXFLAGS="${CFLAGS} -stdlib=libstdc++"
 export CPP="/Applications/Xcode.app/Contents/Developer/usr/bin/cpp"
 export CXXCPP="${CPP}"
 
