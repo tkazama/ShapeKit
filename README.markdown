@@ -40,7 +40,7 @@ After following the instructions above to set up GEOS and PROJ copy the ShapeKit
 - go to the Build Settings tab, search the "Other Linker Flags" entry and add "-lstdc++" to link with libc++ as the standard c++ library
 - #import "ShapeKit.h" in your .m files
 
-You will also need to add the CoreLocation framework to your project. See the sample Xcode project for a simple example of a ShapeKit app.
+You will also need to add the CoreLocation framework to your project. See the [sample project](https://github.com/andreacremaschi/ShapeKitDemo) for a simple example of a ShapeKit app.
 
 ## License
 
