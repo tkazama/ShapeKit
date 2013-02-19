@@ -1,12 +1,17 @@
 # ShapeKit
 
+
 ShapeKit is a geometry library for iOS that aims to bridge [GEOS](http://trac.osgeo.org/geos/) with Apple's MapKit.
+This fork is based on the original repository by Michael Weisman, with major customizations.
+- ShapeKit has been refactored to build in a static library (libShapeKit.a)
+- Apple's MapKit specific methods have been refactored in a dedicated category to generalize the code and remove Apple's MapKit dependency.
+- GEOS linearref functions (project and interpolate on a line) support was added
+
 
 ## Requirements
 
-ShapeKit uses the MKShape Geometries (MKPolygon, MKPointAnnotation, MKPolyline) which were added to MapKit in iOS 4.0. It has been tested on the iPhone and the iPad.
-
 ShapeKit depends on [GEOS](http://trac.osgeo.org/geos/) and [PROJ](http://proj.osgeo.org/). There is a build script in lib\_src which will automate downloading and building universal libraries for both ARMv7 and x86 (simulator) and will copy the libraries and headers to the ShapeKit library directory. To use it, simply run the build\_libs.sh script in the lib\_src directory to install the libraries.
+Depending on build environment, it may be necessary to change the SDK link version in build_ios configuration script.
 
 ## Features
 
@@ -14,25 +19,28 @@ ShapeKit depends on [GEOS](http://trac.osgeo.org/geos/) and [PROJ](http://proj.o
 
 	`ShapeKitPoint *myPoint = [[ShapeKitPoint alloc] initWithCoordinate:CLLocationCoordinate2DMake(0, 0)];`
 
-* ShapeKitGeometries have standard MKShape geometries for use with MapKit
-
-	`myPoint.geometry.title = @"Centre of the Universe";`
-
-	`myPoint.geometry.subtitle = @"The most awesome place in the world";`
-
-	`[myMapKitView addAnnotation:myPoint.geometry]`
-
 * ShapeKit has spatial predicates and topology operations
 
 	`ShapeKitPolygon *bufferedPoint = [myPoint bufferWithWidth:0.005]`
 	
 	`[bufferedPoint containsGeometry:myPoint] \\ Returns YES`
 
+* ShapeKit has support for linear projection and interpolation 
+
+	`ShapeKitPoint *middlePoint = [myLine interpolatePointAtNormalizedDistance: 0.5];`
+
+	`double projectedPosition = [myLine distanceFromOriginToProjectionOfPoint: myPoint];`
+
+
 ## Usage
 
-After following the instructions above to set up GEOS and PROJ copy the ShapeKit Directory into your project directory, and then drag everything except the libs directory into your Xcode project. Go to the Build Phases tab for your application's target (assuming Xcode 4 here) and expand "Link Binary with Libraries". Click the "+" button and select libgeos.a, libgeos_c.a and libproj.a from the ShapeKit/libs directory. This should add the libraries to your project and automatically set the Library Search Path to enable the linker to find the libraries. Under Xcode's  Build Settings tab, search for "search path". The Library Search Path should have been changed to something like "$(inherited) "$(SRCROOT)/../ShapeKit/libs"" pointing to ShapeKit's library directory. Copy and paste this into the Header Search Path.
+After following the instructions above to set up GEOS and PROJ copy the ShapeKit Directory into your project directory, 
+- drag the ShapeKit project file (ShapeKit.xcodeproj) into your Xcode project. 
+- go to the Build Phases tab for your application's target (assuming Xcode 4 here), expand "Target Dependecies" and add ShapeKit. Expand "Link Binary with Libraries" and add libShapeKit.a. This should add the libraries to your project and automatically set the Library and Header Search Paths to enable the linker to find the libraries. 
+- go to the Build Settings tab, search the "Other Linker Flags" entry and add "-lstdc++" to link with libc++ as the standard c++ library
+- #import "ShapeKit.h" in your .m files
 
-You will also need to add the CoreLocation and MapKit frameworks to your project. See the sample Xcode project for a simple example of a ShapeKit app.
+You will also need to add the CoreLocation framework to your project. See the sample Xcode project for a simple example of a ShapeKit app.
 
 ## License
 
