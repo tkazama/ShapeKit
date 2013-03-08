@@ -387,6 +387,7 @@ void log_and_exit(const char *fmt,...) {
         
         // TODO: Move the destroy into the dealloc method
         // GEOSCoordSeq_destroy(seq);
+        _numberOfCoords = count;
         _coords = (CLLocationCoordinate2D *) malloc( sizeof(CLLocationCoordinate2D) * _numberOfCoords );
         memcpy(_coords, coordinates, sizeof(CLLocationCoordinate2D) * _numberOfCoords );
         
@@ -532,6 +533,7 @@ void log_and_exit(const char *fmt,...) {
         
         // TODO: Move the destroy into the dealloc method
         // GEOSCoordSeq_destroy(seq);
+        _numberOfCoords = count;
         _coords = (CLLocationCoordinate2D *) malloc( sizeof(CLLocationCoordinate2D) * _numberOfCoords );
         memcpy(_coords, coordinates, sizeof(CLLocationCoordinate2D) * _numberOfCoords );
         
