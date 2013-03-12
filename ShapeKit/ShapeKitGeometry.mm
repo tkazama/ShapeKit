@@ -20,7 +20,6 @@
 void notice(const char *fmt,...);
 void log_and_exit(const char *fmt,...);
 
-
 @interface ShapeKitGeometry () {
 @protected
     GEOSContextHandle_t _handle;
@@ -45,6 +44,9 @@ void log_and_exit(const char *fmt,...);
 @interface ShapeKitGeometryCollection ()
 @property (strong) NSArray *geometries;
 @end
+
+
+#pragma mark - Simple geometries -
 
 @implementation ShapeKitGeometry
 
@@ -555,6 +557,7 @@ void log_and_exit(const char *fmt,...) {
     
 }
 
+@end
 
 #pragma mark - Geometry collections -
 
@@ -570,20 +573,26 @@ void log_and_exit(const char *fmt,...) {
     return self;
 }
 
+-(void)dealloc
+{
+    _geometries = nil;
+}
+
 -(id)initWithGeosGeometry:(void *)geom {
     self = [super initWithGeosGeometry: geom];
     if (self) {
         
         GEOSContextHandle_t handle = _handle;
+        GEOSGeometry *GEOSGeom = (GEOSGeometry *)geom;
         
         // create an array of copy of original geometries
         // (double memory footprint, but faster access to data
-        int numGeometries = GEOSGetNumGeometries_r(handle,geom);
+        int numGeometries = GEOSGetNumGeometries_r(handle, GEOSGeom);
         NSMutableArray *mArray = [NSMutableArray array];
         for (int i=0; i<numGeometries; i++)
         {
-            GEOSGeometry *curGeom = GEOSGetGeometryN(geom, i);
-            GEOSGeometry *geomCopy = GESGEOSGeom_clone_r(handle, curGeom);
+            const GEOSGeometry *curGeom = GEOSGetGeometryN_r(handle, GEOSGeom, i);
+            GEOSGeometry *geomCopy = GEOSGeom_clone_r(handle, curGeom);
             
             ShapeKitGeometry *geomObj = [[ShapeKitFactory defaultFactory] geometryWithGEOSGeometry: geomCopy];
             [mArray addObject: geomObj];
@@ -604,9 +613,14 @@ void log_and_exit(const char *fmt,...) {
     return [self.geometries objectAtIndex:index];
 }
 
-- (ShapeKitGeometry*) boundary
+-(NSString *)description
 {
+    NSMutableString *geomsList = [[NSMutableString alloc] init];
     
+    int i=0;
+    for (ShapeKitGeometry*geom in self.geometries)
+        [geomsList appendFormat:@"\n     Geometry %i: %@", ++i, [geom description]];
+    return [[super description] stringByAppendingFormat: @"%@", geomsList];
 }
 
 @end
@@ -614,20 +628,17 @@ void log_and_exit(const char *fmt,...) {
 #pragma mark MultiLineString
 @implementation ShapeKitMultiPolyline
 - (NSUInteger) numberOfPolylines        { return [super numberOfGeometries]; }
-- (ShapeKitPolyline*) polylineAtIndex: (NSInteger) index     { return [super geometryAtIndex: index]; }
+- (ShapeKitPolyline*) polylineAtIndex: (NSInteger) index     { return (ShapeKitPolyline *) [super geometryAtIndex: index]; }
 @end
 
 #pragma mark MultiPoint
-@interface ShapeKitMultiPoint
+@implementation ShapeKitMultiPoint
 - (NSUInteger) numberOfPoints   { return [super numberOfGeometries]; }
-- (ShapeKitPoint*) pointAtIndex: (NSInteger) index     { return [super geometryAtIndex: index]; }
+- (ShapeKitPoint*) pointAtIndex: (NSInteger) index     { return  (ShapeKitPoint *)[super geometryAtIndex: index]; }
 @end
 
 #pragma mark MultiPolygon
-@interface ShapeKitMultiPolygon
+@implementation ShapeKitMultiPolygon
 - (NSUInteger) numberOfPolygons { return [super numberOfGeometries]; }
-- (ShapeKitPolygon*) polygonAtIndex: (NSInteger) index       { return [super geometryAtIndex: index]; }
-@end
-
-
+- (ShapeKitPolygon*) polygonAtIndex: (NSInteger) index       { return  (ShapeKitPolygon *)[super geometryAtIndex: index]; }
 @end

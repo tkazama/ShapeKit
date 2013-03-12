@@ -22,12 +22,11 @@
 -(ShapeKitPoint *)centroid;
 -(ShapeKitPoint *)pointOnSurface;
 
-// TODO require adding multigeom support ShapeKitGeometry
-//-(ShapeKitPolygon *)intersectionWithGeometry:(ShapeKitGeometry *)geometry;
-//-(ShapeKitPolygon *)differenceWithGeometry:(ShapeKitGeometry *)geometry;
-//-(ShapeKitPolygon *)boundary;
-//-(ShapeKitPolygon *)unionWithGeometry:(ShapeKitGeometry *)geometry;
-//-(ShapeKitPolygon *)cascadedUnion;
+-(ShapeKitGeometry *)intersectionWithGeometry:(ShapeKitGeometry *)geometry;
+-(ShapeKitGeometry *)differenceWithGeometry:(ShapeKitGeometry *)geometry;
+-(ShapeKitGeometry *)boundary;
+-(ShapeKitGeometry *)unionWithGeometry:(ShapeKitGeometry *)geometry;
+-(ShapeKitGeometry *)cascadedUnion;
 
 
 

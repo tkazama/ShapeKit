@@ -70,12 +70,16 @@
             geomClass = [ShapeKitPolygon class];
             break;
         case GEOS_MULTIPOINT:
+            geomClass = [ShapeKitPoint class];
             break;
         case GEOS_MULTILINESTRING:
+            geomClass = [ShapeKitMultiPolyline class];
             break;
         case GEOS_MULTIPOLYGON:
+            geomClass = [ShapeKitMultiPolygon class];
             break;
         case GEOS_GEOMETRYCOLLECTION:
+            geomClass = [ShapeKitGeometryCollection class];
             break;
     }
 

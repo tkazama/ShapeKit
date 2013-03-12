@@ -11,6 +11,8 @@
 #import "ShapeKitGeometry+Topology.h"
 #import "ShapeKitPrivateInterface.h"
 
+#import "ShapeKitFactory.h"
+
 @implementation ShapeKitGeometry (Topology)
 
 -(ShapeKitPolygon *)envelope {
@@ -36,6 +38,33 @@
 
 -(ShapeKitPoint *)pointOnSurface {
     return [[ShapeKitPoint alloc] initWithGeosGeometry:GEOSPointOnSurface_r(self.handle, self.geosGeom)];
+}
+
+#pragma mark -
+
+-(ShapeKitGeometry *)intersectionWithGeometry:(ShapeKitGeometry *)geometry
+{
+    return [[ShapeKitFactory defaultFactory] geometryWithGEOSGeometry: GEOSIntersection_r(self.handle, self.geosGeom, geometry.geosGeom)];
+}
+
+-(ShapeKitGeometry *)differenceWithGeometry:(ShapeKitGeometry *)geometry
+{
+    return [[ShapeKitFactory defaultFactory] geometryWithGEOSGeometry: GEOSDifference_r(self.handle, self.geosGeom, geometry.geosGeom)];
+}
+
+-(ShapeKitGeometry *)boundary
+{
+    return [[ShapeKitFactory defaultFactory] geometryWithGEOSGeometry: GEOSBoundary_r(self.handle, self.geosGeom)];
+}
+
+-(ShapeKitGeometry *)unionWithGeometry:(ShapeKitGeometry *)geometry
+{
+    return [[ShapeKitFactory defaultFactory] geometryWithGEOSGeometry: GEOSUnion_r(self.handle, self.geosGeom, geometry.geosGeom)];
+}
+
+-(ShapeKitGeometry *)cascadedUnion
+{
+    return [[ShapeKitFactory defaultFactory] geometryWithGEOSGeometry: GEOSUnionCascaded_r(self.handle, self.geosGeom)];
 }
 
 @end

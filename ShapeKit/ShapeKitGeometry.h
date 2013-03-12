@@ -13,6 +13,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
+#pragma mark - Abstract geometry
 
 @interface ShapeKitGeometry : NSObject
 
@@ -31,7 +32,8 @@
 
 @end
 
-// Simple objects
+
+#pragma mark - Simple geometry objects
 
 @interface ShapeKitPoint : ShapeKitGeometry
 @property (readonly) CLLocationCoordinate2D coordinate;
@@ -48,7 +50,7 @@
 @end
 
 
-// Geometry collections
+#pragma mark - Geometry collections
 
 @interface ShapeKitGeometryCollection : ShapeKitGeometry
 - (NSUInteger) numberOfGeometries;
