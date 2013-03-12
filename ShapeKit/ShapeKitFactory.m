@@ -83,20 +83,32 @@
 }
                              
 #pragma mark - Factory methods
-- (ShapeKitGeometry *) geometryWithWKB: (NSData *)wkbData
+- (ShapeKitGeometry *) geometryWithGEOSGeometry: (void *)geometry
 {
-    GEOSWKBReader *WKBReader = GEOSWKBReader_create_r(handle);
-    GEOSGeometry *geosGeom = GEOSWKBReader_read_r(handle, WKBReader, wkbData.bytes, wkbData.length);
-    GEOSWKBReader_destroy_r(handle, WKBReader);
-
+    GEOSGeometry *geosGeom = (GEOSGeometry *)geometry;
+    
+    BOOL isValid =  (GEOSisValid_r(handle, geosGeom) == 1);
+    
+    // Not a valid geometry object
+    if (!isValid || geosGeom == NULL) return nil;
+    
     Class geomClass = [self classForGeometry: geosGeom];
     if (!geomClass)
     {
         NSLog(@"Shapekit error: geometry type '%@' not supported.", [NSString stringWithUTF8String: GEOSGeomType_r(handle, geosGeom)]);
         return nil;
     }
-
+    
     return [[geomClass alloc] initWithGeosGeometry: geosGeom];
+}
+
+- (ShapeKitGeometry *) geometryWithWKB: (NSData *)wkbData
+{
+    GEOSWKBReader *WKBReader = GEOSWKBReader_create_r(handle);
+    GEOSGeometry *geosGeom = GEOSWKBReader_read_r(handle, WKBReader, wkbData.bytes, wkbData.length);
+    GEOSWKBReader_destroy_r(handle, WKBReader);
+    
+    return [self geometryWithGEOSGeometry: geosGeom];
 }
 
 -(ShapeKitGeometry *)geometryWithWKT:(NSString *)wkt
@@ -105,14 +117,7 @@
     GEOSGeometry *geosGeom = GEOSWKTReader_read_r(handle, WKTReader, wkt.UTF8String);
     GEOSWKTReader_destroy_r(handle, WKTReader);
     
-    Class geomClass = [self classForGeometry: geosGeom];
-    if (!geomClass)
-    {
-        NSLog(@"Shapekit error: geometry type '%@' not supported.", [NSString stringWithUTF8String: GEOSGeomType_r(handle, geosGeom)]);
-        return nil;
-    }
-    
-    return [[geomClass alloc] initWithGeosGeometry: geosGeom];
+    return [self geometryWithGEOSGeometry: geosGeom];
 }
 
 #pragma mark GEOS init functions

@@ -15,6 +15,11 @@
 #import <proj_api.h>
 
 #import "ShapeKitPrivateInterface.h"
+#import "ShapeKitFactory.h"
+
+void notice(const char *fmt,...);
+void log_and_exit(const char *fmt,...);
+
 
 @interface ShapeKitGeometry () {
 @protected
@@ -34,6 +39,11 @@
 @property (readwrite) CLLocationCoordinate2D *coords;
 @property (readwrite) id geometry;
 
+@end
+
+
+@interface ShapeKitGeometryCollection ()
+@property (strong) NSArray *geometries;
 @end
 
 @implementation ShapeKitGeometry
@@ -544,6 +554,80 @@ void log_and_exit(const char *fmt,...) {
     return self;
     
 }
+
+
+#pragma mark - Geometry collections -
+
+
+@implementation ShapeKitGeometryCollection
+-(id)init
+{
+    self = [super init];
+    if (self)
+    {
+        _geometries = [NSArray array];
+    }
+    return self;
+}
+
+-(id)initWithGeosGeometry:(void *)geom {
+    self = [super initWithGeosGeometry: geom];
+    if (self) {
+        
+        GEOSContextHandle_t handle = _handle;
+        
+        // create an array of copy of original geometries
+        // (double memory footprint, but faster access to data
+        int numGeometries = GEOSGetNumGeometries_r(handle,geom);
+        NSMutableArray *mArray = [NSMutableArray array];
+        for (int i=0; i<numGeometries; i++)
+        {
+            GEOSGeometry *curGeom = GEOSGetGeometryN(geom, i);
+            GEOSGeometry *geomCopy = GESGEOSGeom_clone_r(handle, curGeom);
+            
+            ShapeKitGeometry *geomObj = [[ShapeKitFactory defaultFactory] geometryWithGEOSGeometry: geomCopy];
+            [mArray addObject: geomObj];
+        }
+        _geometries = [mArray copy];
+        
+    }
+    return self;
+}
+
+- (NSUInteger) numberOfGeometries
+{
+    return self.geometries.count;
+}
+
+- (ShapeKitGeometry*) geometryAtIndex: (NSInteger) index
+{
+    return [self.geometries objectAtIndex:index];
+}
+
+- (ShapeKitGeometry*) boundary
+{
+    
+}
+
+@end
+
+#pragma mark MultiLineString
+@implementation ShapeKitMultiPolyline
+- (NSUInteger) numberOfPolylines        { return [super numberOfGeometries]; }
+- (ShapeKitPolyline*) polylineAtIndex: (NSInteger) index     { return [super geometryAtIndex: index]; }
+@end
+
+#pragma mark MultiPoint
+@interface ShapeKitMultiPoint
+- (NSUInteger) numberOfPoints   { return [super numberOfGeometries]; }
+- (ShapeKitPoint*) pointAtIndex: (NSInteger) index     { return [super geometryAtIndex: index]; }
+@end
+
+#pragma mark MultiPolygon
+@interface ShapeKitMultiPolygon
+- (NSUInteger) numberOfPolygons { return [super numberOfGeometries]; }
+- (ShapeKitPolygon*) polygonAtIndex: (NSInteger) index       { return [super geometryAtIndex: index]; }
+@end
 
 
 @end

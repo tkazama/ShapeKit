@@ -19,6 +19,7 @@
 + (ShapeKitFactory *)defaultFactory;
 
 // factory methods
+- (ShapeKitGeometry *) geometryWithGEOSGeometry: (void *)geometry;
 - (ShapeKitGeometry *) geometryWithWKB: (NSData *)wkbData;
 - (ShapeKitGeometry *) geometryWithWKT: (NSString *)string;
 

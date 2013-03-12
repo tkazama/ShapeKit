@@ -22,16 +22,16 @@
 @property (readonly) void *handle;
 @property (readonly, nonatomic) unsigned int numberOfCoords;
 
-
 -(CLLocationCoordinate2D) coordinateAtIndex: (NSInteger) index;
+
 -(id)initWithWKB:(const unsigned char *) wkb size:(size_t)wkb_size;
 -(id)initWithWKT:(NSString *) wkt;
 -(id)initWithGeosGeometry:(void *)geom;
 -(void) reprojectTo:(NSString *)newProjectionDefinition;
-void notice(const char *fmt,...);
-void log_and_exit(const char *fmt,...);
 
 @end
+
+// Simple objects
 
 @interface ShapeKitPoint : ShapeKitGeometry
 @property (readonly) CLLocationCoordinate2D coordinate;
@@ -45,4 +45,27 @@ void log_and_exit(const char *fmt,...);
 @interface ShapeKitPolygon : ShapeKitGeometry
 -(id)initWithCoordinates:(CLLocationCoordinate2D[])coordinates count:(unsigned int)count;
 @property (readonly) NSArray *interiors;
+@end
+
+
+// Geometry collections
+
+@interface ShapeKitGeometryCollection : ShapeKitGeometry
+- (NSUInteger) numberOfGeometries;
+- (ShapeKitGeometry*) geometryAtIndex: (NSInteger) index;
+@end
+
+@interface ShapeKitMultiPolyline : ShapeKitGeometryCollection
+- (NSUInteger) numberOfPolylines;
+- (ShapeKitPolyline*) polylineAtIndex: (NSInteger) index;
+@end
+
+@interface ShapeKitMultiPoint : ShapeKitGeometryCollection
+- (NSUInteger) numberOfPoints;
+- (ShapeKitPoint*) pointAtIndex: (NSInteger) index;
+@end
+
+@interface ShapeKitMultiPolygon : ShapeKitGeometryCollection
+- (NSUInteger) numberOfPolygons;
+- (ShapeKitPolygon*) polygonAtIndex: (NSInteger) index;
 @end
