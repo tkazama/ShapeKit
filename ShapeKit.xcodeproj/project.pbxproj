@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		CD345F2016F7630600B69077 /* ShapeKit documentation */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = CD345F2316F7630600B69077 /* Build configuration list for PBXAggregateTarget "ShapeKit documentation" */;
+			buildPhases = (
+				CD345F2416F7630A00B69077 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = "ShapeKit documentation";
+			productName = Documentation;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		CD90C1701668A378006E5D8F /* ShapeKitFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = CD90C1671668A36F006E5D8F /* ShapeKitFactory.m */; };
 		CD90C1711668A378006E5D8F /* ShapeKitGeometry.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD90C1691668A36F006E5D8F /* ShapeKitGeometry.mm */; };
@@ -187,9 +201,26 @@
 			projectRoot = "";
 			targets = (
 				CDA9A7661667C87A0008D661 /* ShapeKit */,
+				CD345F2016F7630600B69077 /* ShapeKit documentation */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CD345F2416F7630A00B69077 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/appledoc \\\n--project-name \"ShapeKit\" \\\n--project-company \"redcluster\" \\\n--company-id \"eu.redcluster\" \\\n--output \"${PROJECT_DIR}/Documentation\" \\\n--create-docset \\\n--install-docset \\\n--create-html \\\n--exit-threshold 2 \\\n--no-repeat-first-par \\\n--index-desc \"${PROJECT_DIR}/README.markdown\" \\\n\"${PROJECT_DIR}/ShapeKit\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CDA9A7631667C87A0008D661 /* Sources */ = {
@@ -207,6 +238,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		CD345F2116F7630600B69077 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		CD345F2216F7630600B69077 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		CDA9A7731667C87A0008D661 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -297,6 +342,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		CD345F2316F7630600B69077 /* Build configuration list for PBXAggregateTarget "ShapeKit documentation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD345F2116F7630600B69077 /* Debug */,
+				CD345F2216F7630600B69077 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		CDA9A7611667C87A0008D661 /* Build configuration list for PBXProject "ShapeKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

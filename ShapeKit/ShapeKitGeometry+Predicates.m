@@ -80,7 +80,7 @@
 }
 
 
--(BOOL)isRelatedToGeometry:(ShapeKitGeometry *)compareGeometry WithRelatePattern:(NSString *)pattern {
+-(BOOL)isRelatedToGeometry:(ShapeKitGeometry *)compareGeometry withRelatePattern:(NSString *)pattern {
     GEOSContextHandle_t handle = self.handle;
     GEOSGeometry *geosGeom = self.geosGeom;
 
