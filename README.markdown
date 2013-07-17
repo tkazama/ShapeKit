@@ -51,7 +51,7 @@ Check if they exist and then leave them alone, just:
 - drag the ShapeKit project file (ShapeKit.xcodeproj) into your Xcode project. 
 - go to the Build Phases tab for your application's target (assuming Xcode 4 here), expand "Target Dependecies" and add ShapeKit. Expand "Link Binary with Libraries" and add libShapeKit.a. This should add the libraries to your project and automatically set the Library and Header Search Paths to enable the linker to find the libraries. 
 - go to the Build Settings tab, search the "Other Linker Flags" entry and add "-lstdc++" to link with libc++ as the standard c++ library
-- #import `"ShapeKit.h"` in your .m files
+- `#import "ShapeKit.h"` in your .m files
 
 But hey, why choose the pain when you can simply use CocoaPods?
 
