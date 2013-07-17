@@ -3,7 +3,7 @@
 
 ShapeKit is a iOS/OSX library that offers an Objective-C interface to the powerful [GEOS](http://trac.osgeo.org/geos/) library.
 Through GEOS, ShapeKit includes all the OpenGIS Simple Features for SQL spatial predicate functions and spatial operators, as well as specific JTS enhanced topology functions.
-This fork is based on the (original repository)[https://github.com/mweisman/ShapeKit] by Michael Weisman, with major customizations.
+This fork is based on the [original repository](https://github.com/mweisman/ShapeKit) by Michael Weisman, with major customizations.
 - ShapeKit has been refactored to build in a static library (libShapeKit.a)
 - Apple's MapKit specific methods have been refactored in a dedicated category to generalize the code and remove Apple's MapKit dependency. ShapeKit just takes care of the model, so that you can choose the map library you prefer (Apple's MapKit, route-me in the [original flavour](https://github.com/route-me/route-me) or in [Alpstein](http://github.com/Alpstein) or [Mapbox](https://github.com/mapbox/mapbox-ios-sdk) forks ecc..)
 - GEOS linearref functions (project and interpolate on a line) support was added
@@ -34,9 +34,10 @@ This fork is based on the (original repository)[https://github.com/mweisman/Shap
 The easy way is using CocoaPods (credits go to Juan Collas! thanks). Since mingling with ShapeKit's dependencies is not that easy, you are strongly encouraged to get this path.
 
 Podfile example for iOS
-
-	`platform :ios, '5.0'`
-	`pod 'ShapeKit'`
+```
+	platform :ios, '5.0'
+	pod 'ShapeKit'
+```
 
 Now you should be able to use Shapekit in your project, just `#import <ShapeKit/ShapeKit.h>` in your .m files
 
@@ -50,7 +51,7 @@ Check if they exist and then leave them alone, just:
 - drag the ShapeKit project file (ShapeKit.xcodeproj) into your Xcode project. 
 - go to the Build Phases tab for your application's target (assuming Xcode 4 here), expand "Target Dependecies" and add ShapeKit. Expand "Link Binary with Libraries" and add libShapeKit.a. This should add the libraries to your project and automatically set the Library and Header Search Paths to enable the linker to find the libraries. 
 - go to the Build Settings tab, search the "Other Linker Flags" entry and add "-lstdc++" to link with libc++ as the standard c++ library
-- #import "ShapeKit.h" in your .m files
+- #import `"ShapeKit.h"` in your .m files
 
 But hey, why choose the pain when you can simply use CocoaPods?
 
