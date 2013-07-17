@@ -61,3 +61,5 @@ You can refer to the [sample project](https://github.com/andreacremaschi/ShapeKi
 ## License
 
 This is free software; you can redistribute and/or modify it under the terms of the GNU Lesser General Public Licence as published by the Free Software Foundation. See the COPYING file for more information.
+
+**License note: Be aware that LGPL v2.1 (GEOS license) and Apple Store compatibility is at least controversial** ([Ragi Burhum's blog post](http://blog.burhum.com/post/38236943467/your-lgpl-license-is-completely-destroying-ios-adoption) explains why - I join his appeal to open up the license, anyway).
