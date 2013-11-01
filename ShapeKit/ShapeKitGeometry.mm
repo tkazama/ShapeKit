@@ -88,12 +88,12 @@ void log_and_exit(const char *fmt,...);
     if (self)
     {        
         GEOSContextHandle_t handle = (GEOSContextHandle_t)_handle;
-        GEOSGeometry *geosGeom = self.geosGeom;
         
         GEOSWKTReader *WKTReader = GEOSWKTReader_create_r(handle);
         _geosGeom = GEOSWKTReader_read_r(handle, WKTReader, [wkt UTF8String]);
         GEOSWKTReader_destroy_r(handle, WKTReader);
-        
+      
+        GEOSGeometry *geosGeom = self.geosGeom;
         self.geomType = [NSString stringWithUTF8String:GEOSGeomType_r(handle, geosGeom)];
         
         GEOSWKTWriter *WKTWriter = GEOSWKTWriter_create_r(handle);
