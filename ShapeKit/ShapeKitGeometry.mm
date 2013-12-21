@@ -86,15 +86,17 @@ void log_and_exit(const char *fmt,...);
 -(id)initWithWKT:(NSString *) wkt {
     self = [self init];
     if (self)
-    {        
+    {
         GEOSContextHandle_t handle = (GEOSContextHandle_t)_handle;
         
         GEOSWKTReader *WKTReader = GEOSWKTReader_create_r(handle);
         _geosGeom = GEOSWKTReader_read_r(handle, WKTReader, [wkt UTF8String]);
         GEOSWKTReader_destroy_r(handle, WKTReader);
-      
+        
         GEOSGeometry *geosGeom = self.geosGeom;
-        self.geomType = [NSString stringWithUTF8String:GEOSGeomType_r(handle, geosGeom)];
+        char *geomTypeStr =GEOSGeomType_r(handle, geosGeom);
+        self.geomType = [NSString stringWithUTF8String:geomTypeStr];
+        free(geomTypeStr);
         
         GEOSWKTWriter *WKTWriter = GEOSWKTWriter_create_r(handle);
         self.wktGeom = [NSString stringWithUTF8String:GEOSWKTWriter_write_r(handle, WKTWriter, geosGeom)];
@@ -109,14 +111,21 @@ void log_and_exit(const char *fmt,...);
     if (self)
     {
         GEOSContextHandle_t handle = (GEOSContextHandle_t)_handle;
-
+        
         _geosGeom = (GEOSGeometry *)geom;
-        self.geomType = [NSString stringWithUTF8String:GEOSGeomType_r(handle, _geosGeom)];
+        
+        char *geomTypeStr = GEOSGeomType_r(handle, _geosGeom);
+        self.geomType = [NSString stringWithUTF8String: geomTypeStr];
+        free(geomTypeStr);
+        
         GEOSWKTWriter *WKTWriter = GEOSWKTWriter_create_r(handle);
-        self.wktGeom = [NSString stringWithUTF8String:GEOSWKTWriter_write_r(handle, WKTWriter, _geosGeom)];
+        char *wktGeomStr = GEOSWKTWriter_write_r(handle, WKTWriter, _geosGeom);
+        self.wktGeom = [NSString stringWithUTF8String: wktGeomStr];
+        free(wktGeomStr);
+        
         GEOSWKTWriter_destroy_r(handle, WKTWriter);
     }
-    return self;    
+    return self;
 }
 
 -(NSString *)description
