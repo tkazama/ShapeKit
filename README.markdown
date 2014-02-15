@@ -13,20 +13,23 @@ This fork is based on the [original repository](https://github.com/mweisman/Shap
 
 * ShapeKitGeometries are standard cocoa objects
 
-	`ShapeKitPoint *myPoint = [[ShapeKitPoint alloc] initWithCoordinate:CLLocationCoordinate2DMake(0, 0)];`
+```objc
+ShapeKitPoint *myPoint = [[ShapeKitPoint alloc] initWithCoordinate:CLLocationCoordinate2DMake(0, 0)];
+```
 
 * ShapeKit has spatial predicates and topology operations
 
-	`ShapeKitPolygon *bufferedPoint = [myPoint bufferWithWidth:0.005]`
-	
-	`[bufferedPoint containsGeometry:myPoint] \\ Returns YES`
+```objc
+ShapeKitPolygon *bufferedPoint = [myPoint bufferWithWidth:0.005]
+[bufferedPoint containsGeometry:myPoint] \\ Returns YES
+```
 
 * ShapeKit has support for linear projection and interpolation 
 
-	`ShapeKitPoint *middlePoint = [myLine interpolatePointAtNormalizedDistance: 0.5];`
-
-	`double projectedPosition = [myLine distanceFromOriginToProjectionOfPoint: myPoint];`
-
+```objc
+ShapeKitPoint *middlePoint = [myLine interpolatePointAtNormalizedDistance: 0.5];
+double projectedPosition = [myLine distanceFromOriginToProjectionOfPoint: myPoint];
+```
 
 ## Project setup
 
@@ -35,14 +38,15 @@ The easy way is using CocoaPods: since mingling with ShapeKit's dependencies is 
 
 But before you must install the [GNU build system](http://en.wikipedia.org/wiki/GNU_build_system) if you haven't already:
 
-```
+```bash
 brew install automake autoconf libtool
 ```
 
 Now you can create your Podfile as usual:
-```
-	platform :ios, '5.0'
-	pod 'ShapeKit'
+
+```ruby
+platform :ios, '5.0'
+pod 'ShapeKit'
 ```
 
 Now you should be able to use Shapekit in your project, just `#import <ShapeKit/ShapeKit.h>` in your .m files
