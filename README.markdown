@@ -31,9 +31,15 @@ This fork is based on the [original repository](https://github.com/mweisman/Shap
 ## Project setup
 
 ### Installing with CocoaPods
-The easy way is using CocoaPods (credits go to Juan Collas! thanks). Since mingling with ShapeKit's dependencies is not that easy, you are strongly encouraged to get this path.
+The easy way is using CocoaPods: since mingling with ShapeKit's dependencies is not that easy, you are strongly encouraged to get this path.
 
-Podfile example for iOS
+But before you must install the [GNU build system](http://en.wikipedia.org/wiki/GNU_build_system) if you haven't already:
+
+```
+brew install automake autoconf libtool
+```
+
+Now you can create your Podfile as usual:
 ```
 	platform :ios, '5.0'
 	pod 'ShapeKit'
@@ -62,4 +68,4 @@ You can refer to the [sample project](https://github.com/andreacremaschi/ShapeKi
 
 This is free software; you can redistribute and/or modify it under the terms of the GNU Lesser General Public Licence as published by the Free Software Foundation. See the COPYING file for more information.
 
-**License note: Be aware that LGPL v2.1 (GEOS license) and Apple Store compatibility is at least controversial** ([Ragi Burhum's blog post](http://blog.burhum.com/post/38236943467/your-lgpl-license-is-completely-destroying-ios-adoption) explains why - I join his appeal to open up the license, anyway).
+**License note: Be aware that LGPL v2.1 (GEOS license) and Apple Store compatibility is at least controversial** (search for "LGPL iOS" on Google to know why).
