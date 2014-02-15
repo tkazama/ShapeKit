@@ -21,7 +21,7 @@ ShapeKitPoint *myPoint = [[ShapeKitPoint alloc] initWithCoordinate:CLLocationCoo
 
 ```objc
 ShapeKitPolygon *bufferedPoint = [myPoint bufferWithWidth:0.005]
-[bufferedPoint containsGeometry:myPoint] \\ Returns YES
+[bufferedPoint containsGeometry:myPoint]; // Returns YES
 ```
 
 * ShapeKit has support for linear projection and interpolation 
