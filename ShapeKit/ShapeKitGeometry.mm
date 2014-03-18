@@ -24,7 +24,7 @@ void log_and_exit(const char *fmt,...);
 @protected
     GEOSContextHandle_t _handle;
     GEOSGeometry *_geosGeom;
-    NSUInteger _numberOfCoords;
+    unsigned int _numberOfCoords;
     CLLocationCoordinate2D *_coords;
 }
 
