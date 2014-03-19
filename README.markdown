@@ -49,24 +49,12 @@ platform :ios, '5.0'
 pod 'ShapeKit'
 ```
 
+and execute ```pod install```
+
+Now an extra step is required: ShapeKit resides on C++ libraries and we should tell the compiler that our project files should be treated as Objective-C++. Just rename your main file `main.m` to `main.mm` and the trick is done.
+
 Now you should be able to use Shapekit in your project, just `#import <ShapeKit/ShapeKit.h>` in your .m files
 
-### Going the old way
-If you prefer to build everything by yourself, you will have to build [GEOS](http://trac.osgeo.org/geos/) and [PROJ.4](http://proj.osgeo.org/) before. 
-There is a build script in Libraries which will automate downloading and building universal libraries for both ARMv7 and x86 (simulator) and will copy the libraries and headers to the ShapeKit library directory. To use it, simply run the build\_libs.sh script in the Libraries directory to install the libraries.
-Depending on build environment, it may be necessary to change the iOS SDK link version in build\_ios configuration script. 
-
-If everything goes right, you'll find yourself with a new 'Libraries/libs' folder with two subfolders, 'include' and 'bin', containing the files required to compile ShapeKit. 
-Check if they exist and then leave them alone, just: 
-- drag the ShapeKit project file (ShapeKit.xcodeproj) into your Xcode project. 
-- go to the Build Phases tab for your application's target (assuming Xcode 4 here), expand "Target Dependecies" and add ShapeKit. Expand "Link Binary with Libraries" and add libShapeKit.a. This should add the libraries to your project and automatically set the Library and Header Search Paths to enable the linker to find the libraries. 
-- go to the Build Settings tab, search the "Other Linker Flags" entry and add "-lstdc++" to link with libc++ as the standard c++ library
-- `#import "ShapeKit.h"` in your .m files
-
-But hey, why choose the pain when you can simply use CocoaPods?
-
-You will also need to add the CoreLocation framework to your project. 
-You can refer to the [sample project](https://github.com/andreacremaschi/ShapeKitDemo) for a simple example of a ShapeKit app.
 
 ## License
 
