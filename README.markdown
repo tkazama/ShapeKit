@@ -33,7 +33,7 @@ double projectedPosition = [myLine distanceFromOriginToProjectionOfPoint: myPoin
 
 ## Project setup
 
-### Installing with CocoaPods
+### CocoaPods
 The easy way is using CocoaPods: since mingling with ShapeKit's dependencies is not that easy, you are strongly encouraged to get this path.
 
 But before you must install the [GNU build system](http://en.wikipedia.org/wiki/GNU_build_system) if you haven't already:
