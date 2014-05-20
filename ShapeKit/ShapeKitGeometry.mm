@@ -578,29 +578,49 @@ void log_and_exit(const char *fmt,...) {
     _geometries = nil;
 }
 
+-(id)initWithWKB:(const unsigned char *) wkb size:(size_t)wkb_size {
+    self = [super initWithWKB:wkb size:wkb_size];
+    if (self)
+    {
+        [self loadSubGeometries];
+    }
+    
+    return self;
+}
+
 -(id)initWithGeosGeometry:(void *)geom {
     self = [super initWithGeosGeometry: geom];
     if (self) {
-        
-        GEOSContextHandle_t handle = _handle;
-        GEOSGeometry *GEOSGeom = (GEOSGeometry *)geom;
-        
-        // create an array of copy of original geometries
-        // (double memory footprint, but faster access to data
-        int numGeometries = GEOSGetNumGeometries_r(handle, GEOSGeom);
-        NSMutableArray *mArray = [NSMutableArray array];
-        for (int i=0; i<numGeometries; i++)
-        {
-            const GEOSGeometry *curGeom = GEOSGetGeometryN_r(handle, GEOSGeom, i);
-            GEOSGeometry *geomCopy = GEOSGeom_clone_r(handle, curGeom);
-            
-            ShapeKitGeometry *geomObj = [[ShapeKitFactory defaultFactory] geometryWithGEOSGeometry: geomCopy];
-            [mArray addObject: geomObj];
-        }
-        _geometries = [mArray copy];
-        
+        [self loadSubGeometries];
     }
     return self;
+}
+
+-(id)initWithWKT:(NSString *) wkt {
+    self = [super initWithWKT:wkt];
+    if (self) {
+        [self loadSubGeometries];
+    }
+    return self;
+}
+
+// create an array of copy of original geometries
+// (double memory footprint, but faster access to data
+- (void) loadSubGeometries
+{
+    GEOSContextHandle_t handle = _handle;
+    
+    int numGeometries = GEOSGetNumGeometries_r(handle, self.geosGeom);
+    NSMutableArray *mArray = [NSMutableArray array];
+    for (int i=0; i<numGeometries; i++)
+    {
+        const GEOSGeometry *curGeom = GEOSGetGeometryN_r(handle, self.geosGeom, i);
+        GEOSGeometry *geomCopy = GEOSGeom_clone_r(handle, curGeom);
+        
+        ShapeKitGeometry *geomObj = [[ShapeKitFactory defaultFactory] geometryWithGEOSGeometry: geomCopy];
+        [mArray addObject: geomObj];
+    }
+    _geometries = [mArray copy];
 }
 
 - (NSUInteger) numberOfGeometries
