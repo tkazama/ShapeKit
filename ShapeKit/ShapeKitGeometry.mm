@@ -259,20 +259,7 @@ void log_and_exit(const char *fmt,...) {
     
     if (self)
     {
-        GEOSContextHandle_t handle = (GEOSContextHandle_t)_handle;
-        GEOSCoordSequence *sequence = GEOSCoordSeq_clone_r(handle, GEOSGeom_getCoordSeq(_geosGeom));
-        
-        double xCoord;
-        GEOSCoordSeq_getX_r(handle, sequence, 0, &xCoord);
-        
-        double yCoord;
-        GEOSCoordSeq_getY_r(handle, sequence, 0, &yCoord);
-         
-        _coords = (CLLocationCoordinate2D *) malloc( sizeof(CLLocationCoordinate2D) );
-        *_coords = CLLocationCoordinate2DMake(yCoord, xCoord);
-                        
-        GEOSCoordSeq_getSize_r(handle, sequence, &_numberOfCoords);
-        GEOSCoordSeq_destroy_r(handle, sequence);
+        [self extractCoordinatesFromGEOSGeom];
     }
     
     return self;
@@ -284,23 +271,28 @@ void log_and_exit(const char *fmt,...) {
     
     if (self)
     {
-        GEOSContextHandle_t handle = (GEOSContextHandle_t)_handle;
-        GEOSCoordSequence *sequence = GEOSCoordSeq_clone_r(handle, GEOSGeom_getCoordSeq_r(handle, _geosGeom));
-        
-        double xCoord;
-        GEOSCoordSeq_getX_r(handle, sequence, 0, &xCoord);
-        
-        double yCoord;
-        GEOSCoordSeq_getY_r(handle, sequence, 0, &yCoord);
-
-        _coords = (CLLocationCoordinate2D *) malloc( sizeof(CLLocationCoordinate2D) );
-        *_coords = CLLocationCoordinate2DMake(yCoord, xCoord);
-
-        GEOSCoordSeq_getSize_r(handle, sequence, &_numberOfCoords);
-        GEOSCoordSeq_destroy_r(handle, sequence);
+        [self extractCoordinatesFromGEOSGeom];
     }
     
     return self;
+}
+
+- (void) extractCoordinatesFromGEOSGeom
+{
+    GEOSContextHandle_t handle = (GEOSContextHandle_t)_handle;
+    GEOSCoordSequence *sequence = GEOSCoordSeq_clone_r(handle, GEOSGeom_getCoordSeq_r(handle, _geosGeom));
+    
+    double xCoord;
+    GEOSCoordSeq_getX_r(handle, sequence, 0, &xCoord);
+    
+    double yCoord;
+    GEOSCoordSeq_getY_r(handle, sequence, 0, &yCoord);
+    
+    _coords = (CLLocationCoordinate2D *) malloc( sizeof(CLLocationCoordinate2D) );
+    *_coords = CLLocationCoordinate2DMake(yCoord, xCoord);
+    
+    GEOSCoordSeq_getSize_r(handle, sequence, &_numberOfCoords);
+    GEOSCoordSeq_destroy_r(handle, sequence);
 }
 
 -(id)initWithCoordinate:(CLLocationCoordinate2D)coordinate
