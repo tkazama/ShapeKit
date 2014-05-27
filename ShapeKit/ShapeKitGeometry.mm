@@ -54,18 +54,23 @@ void log_and_exit(const char *fmt,...);
 - (id) init
 {
     self = [super init];
-    if (self != nil) {
+    
+    if (self != nil)
+    {
         // initialize GEOS library
         _handle = initGEOS_r(notice, log_and_exit);
         _coords = NULL;
     }
+    
     return self;
 }
 
--(id)initWithWKB:(const unsigned char *) wkb size:(size_t)wkb_size {
+-(id)initWithWKB:(const unsigned char *) wkb size:(size_t)wkb_size
+{
     self = [self init];
-    if (self) {
-        
+    
+    if (self)
+    {
         GEOSContextHandle_t handle = (GEOSContextHandle_t)self.handle;
         
         GEOSWKBReader *WKBReader = GEOSWKBReader_create_r(handle);
@@ -78,13 +83,14 @@ void log_and_exit(const char *fmt,...);
         self.wktGeom = [NSString stringWithUTF8String:GEOSWKTWriter_write_r(handle, WKTWriter, self.geosGeom)];
         GEOSWKTWriter_destroy_r(handle, WKTWriter);
     }
+    
     return self;
 }
 
-
-
--(id)initWithWKT:(NSString *) wkt {
+-(id)initWithWKT:(NSString *) wkt
+{
     self = [self init];
+    
     if (self)
     {        
         GEOSContextHandle_t handle = (GEOSContextHandle_t)_handle;
@@ -104,8 +110,10 @@ void log_and_exit(const char *fmt,...);
     return self;
 }
 
--(id)initWithGeosGeometry:(void *)geom {
+-(id)initWithGeosGeometry:(void *)geom
+{
     self = [self init];
+    
     if (self)
     {
         GEOSContextHandle_t handle = (GEOSContextHandle_t)_handle;
@@ -122,12 +130,14 @@ void log_and_exit(const char *fmt,...);
 -(NSString *)description
 {
     NSMutableString *pointsList = [[NSMutableString alloc] init];
-    CLLocationCoordinate2D* curCoords=NULL;
+    CLLocationCoordinate2D* curCoords = NULL;
+    
     for (int i=0;i<self.numberOfCoords;i++)
     {
         curCoords = _coords+i;
         [pointsList appendFormat:@"[%.4f, %.4f] ", curCoords->latitude,curCoords->longitude]; 
     }
+    
     return [[super description] stringByAppendingFormat: @"%@", pointsList];
 }
 
@@ -138,7 +148,8 @@ void log_and_exit(const char *fmt,...);
     return _coords[index];
 }
 
--(void) reprojectTo:(NSString *)newProjectionDefinition {
+-(void) reprojectTo:(NSString *)newProjectionDefinition
+{
     // TODO: Impliment this as an SRID int stored on the geom rather than a proj4 string
 	projPJ source, destination;
 	source = pj_init_plus([self.projDefinition UTF8String]);
@@ -224,21 +235,26 @@ void log_and_exit(const char *fmt,...) {
 #pragma mark -
 
 @implementation ShapeKitPoint
--(id)init
+
+- (id) init
 {
     self = [super init];
+    
     if (self)
     {
         _numberOfCoords = 1;
     }
+    
     return self;
 }
 
--(id)initWithWKT:(NSString *) wkt {
+- (id) initWithWKT: (NSString *)wkt
+{
     self = [super initWithWKT:wkt];
-    if (self) {
-
         GEOSCoordSequence *sequence = GEOSCoordSeq_clone_r(_handle, GEOSGeom_getCoordSeq(_geosGeom));
+    
+    if (self)
+    {
         double xCoord;
         GEOSCoordSeq_getX_r(_handle, sequence, 0, &xCoord);
         
@@ -251,12 +267,16 @@ void log_and_exit(const char *fmt,...) {
         GEOSCoordSeq_getSize_r(_handle, sequence, &_numberOfCoords);
         GEOSCoordSeq_destroy_r(_handle, sequence);
     }
+    
     return self;
 }
 
--(id)initWithGeosGeometry:(void *)geom {
+- (id) initWithGeosGeometry: (void *)geom
+{
     self = [super initWithGeosGeometry:geom];
-    if (self) {
+    
+    if (self)
+    {
         GEOSContextHandle_t handle = (GEOSContextHandle_t)_handle;
 
         GEOSCoordSequence *sequence = GEOSCoordSeq_clone_r(handle, GEOSGeom_getCoordSeq_r(_handle, _geosGeom));
@@ -272,19 +292,24 @@ void log_and_exit(const char *fmt,...) {
         GEOSCoordSeq_getSize_r(handle, sequence, &_numberOfCoords);
         GEOSCoordSeq_destroy_r(handle, sequence);
     }
+    
     return self;
 }
 
--(id)initWithCoordinate:(CLLocationCoordinate2D)coordinate {
+-(id)initWithCoordinate:(CLLocationCoordinate2D)coordinate
+{
     self = [self init];
-    if (self) {
-        
+    
+    if (self)
+    {
         GEOSContextHandle_t handle = (GEOSContextHandle_t)_handle;
 
         GEOSCoordSequence *seq = GEOSCoordSeq_create_r(handle, 1,2);
         GEOSCoordSeq_setX_r(handle, seq, 0, coordinate.longitude);
         GEOSCoordSeq_setY_r(handle, seq, 0, coordinate.latitude);
+        
         GEOSGeometry *newGeosGeom = GEOSGeom_createPoint_r(handle, seq);
+        
         NSAssert (newGeosGeom != NULL, @"Error creating ShapeKitPoint");
         _geosGeom=newGeosGeom;
         
@@ -300,6 +325,7 @@ void log_and_exit(const char *fmt,...) {
         GEOSWKTWriter_destroy_r(handle, WKTWriter);        
         
     }    
+    
     return self;
 }
 
@@ -418,12 +444,12 @@ void log_and_exit(const char *fmt,...) {
 @implementation ShapeKitPolygon
 @synthesize interiors = _interiors;
 
--(id)initWithWKB:(const unsigned char *) wkb size:(size_t)wkb_size {
-	
-    size_t length = wkb_size;
+-(id)initWithWKB:(const unsigned char *) wkb size:(size_t)wkb_size
+{
+    self = [super initWithWKB:wkb size:wkb_size];
     
-    self = [super initWithWKB:wkb size:length];
-    if (self) {
+    if (self)
+    {
 
         GEOSCoordSequence *sequence = nil;
         GEOSContextHandle_t handle = _handle;
@@ -559,13 +585,15 @@ void log_and_exit(const char *fmt,...) {
 
 @end
 
+
 #pragma mark - Geometry collections -
 
-
 @implementation ShapeKitGeometryCollection
+
 -(id)init
 {
     self = [super init];
+    
     if (self)
     {
         _geometries = [NSArray array];
@@ -578,8 +606,10 @@ void log_and_exit(const char *fmt,...) {
     _geometries = nil;
 }
 
--(id)initWithWKB:(const unsigned char *) wkb size:(size_t)wkb_size {
+- (id) initWithWKB: (const unsigned char *)wkb size: (size_t)wkb_size
+{
     self = [super initWithWKB:wkb size:wkb_size];
+    
     if (self)
     {
         [self loadSubGeometries];
@@ -588,19 +618,27 @@ void log_and_exit(const char *fmt,...) {
     return self;
 }
 
--(id)initWithGeosGeometry:(void *)geom {
+- (id) initWithGeosGeometry: (void *)geom
+{
     self = [super initWithGeosGeometry: geom];
-    if (self) {
+    
+    if (self)
+    {
         [self loadSubGeometries];
     }
+    
     return self;
 }
 
--(id)initWithWKT:(NSString *) wkt {
+- (id) initWithWKT: (NSString *)wkt
+{
     self = [super initWithWKT:wkt];
-    if (self) {
+    
+    if (self)
+    {
         [self loadSubGeometries];
     }
+    
     return self;
 }
 
@@ -609,7 +647,7 @@ void log_and_exit(const char *fmt,...) {
 - (void) loadSubGeometries
 {
     GEOSContextHandle_t handle = _handle;
-    
+
     int numGeometries = GEOSGetNumGeometries_r(handle, self.geosGeom);
     NSMutableArray *mArray = [NSMutableArray array];
     for (int i=0; i<numGeometries; i++)
@@ -640,6 +678,7 @@ void log_and_exit(const char *fmt,...) {
     int i=0;
     for (ShapeKitGeometry*geom in self.geometries)
         [geomsList appendFormat:@"\n     Geometry %i: %@", ++i, [geom description]];
+    
     return [[super description] stringByAppendingFormat: @"%@", geomsList];
 }
 
