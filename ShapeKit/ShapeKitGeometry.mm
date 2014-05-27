@@ -58,7 +58,7 @@ void log_and_exit(const char *fmt,...);
     if (self != nil)
     {
         // initialize GEOS library
-        self.handle = initGEOS_r(notice, log_and_exit);
+        _handle = initGEOS_r(notice, log_and_exit);
         _coords = NULL;
     }
     
