@@ -452,137 +452,134 @@ void log_and_exit(const char *fmt,...) {
     
     if (self)
     {
-
-        GEOSCoordSequence *sequence = nil;
-        GEOSContextHandle_t handle = _handle;
-        GEOSGeometry *geosGeom = _geosGeom;
-        
-        int numInteriorRings = GEOSGetNumInteriorRings_r(handle, geosGeom);
-        NSMutableArray *interiors = [[NSMutableArray alloc] init];
-        int interiorIndex = 0;
-        for (interiorIndex = 0; interiorIndex< numInteriorRings; interiorIndex++) {
-            const GEOSGeometry *interior = GEOSGetInteriorRingN_r(handle, geosGeom, interiorIndex);
-            sequence = GEOSCoordSeq_clone_r(handle, GEOSGeom_getCoordSeq_r(handle, interior));
-            unsigned int numCoordsInt = 0;
-            GEOSCoordSeq_getSize_r(handle, sequence, &numCoordsInt); 
-            CLLocationCoordinate2D coordsInt[numCoordsInt];
-            for (int coord = 0; coord < numCoordsInt; coord++) {
-                double xCoord = NULL;
-                
-                GEOSCoordSeq_getX_r(handle, sequence, coord, &xCoord);
-                
-                double yCoord = NULL;
-                GEOSCoordSeq_getY_r(handle, sequence, coord, &yCoord);
-                coordsInt[coord] = CLLocationCoordinate2DMake(yCoord, xCoord);
-            }
-            ShapeKitPolygon *curInterior = [[ShapeKitPolygon alloc] initWithCoordinates: coordsInt
-                                                                               count: numCoordsInt];
-            [interiors addObject: curInterior];
-            GEOSCoordSeq_destroy_r(handle, sequence);		
-        }
-        const GEOSGeometry *exterior = GEOSGetExteriorRing_r(handle, geosGeom);
-        sequence = GEOSCoordSeq_clone_r(handle, GEOSGeom_getCoordSeq_r(handle, exterior));
-        GEOSCoordSeq_getSize_r(handle, sequence, &_numberOfCoords);
-        CLLocationCoordinate2D coordsExt[_numberOfCoords];
-        for (int coord = 0; coord < _numberOfCoords; coord++) {
-            double xCoord = NULL;
-            GEOSCoordSeq_getX_r(handle, sequence, coord, &xCoord);
-            
-            double yCoord = NULL;
-            GEOSCoordSeq_getY_r(handle, sequence, coord, &yCoord);
-            coordsExt[coord] = CLLocationCoordinate2DMake(yCoord, xCoord);
-        }
-        if ([interiors count])
-            _interiors = [interiors copy];
-        
-        _coords = (CLLocationCoordinate2D *) malloc( sizeof(CLLocationCoordinate2D) * _numberOfCoords );
-        memcpy(_coords, coordsExt, sizeof(CLLocationCoordinate2D) * _numberOfCoords );
-
-        
-        GEOSCoordSeq_destroy_r(handle, sequence);
-        }
+        [self loadInteriors];
+        [self loadExteriorRing];
+    }
+    
     return self;
 }
 
--(id)initWithWKT:(NSString *) wkt {
+-(id)initWithWKT: (NSString *)wkt
+{
     self = [super initWithWKT:wkt];
-    if (self) {
-        
-        GEOSContextHandle_t handle = _handle;
-        GEOSGeometry *geosGeom = _geosGeom;
-
-        GEOSCoordSequence *sequence = GEOSCoordSeq_clone_r(handle, GEOSGeom_getCoordSeq_r(handle, GEOSGetExteriorRing(geosGeom)));
-        GEOSCoordSeq_getSize_r(handle, sequence, &_numberOfCoords);
-        CLLocationCoordinate2D coords[_numberOfCoords];
-        
-        for (int coord = 0; coord < _numberOfCoords; coord++) {
-            double xCoord = NULL;
-            GEOSCoordSeq_getX_r(handle, sequence, coord, &xCoord);
-            
-            double yCoord = NULL;
-            GEOSCoordSeq_getY_r(handle, sequence, coord, &yCoord);
-            coords[coord] = CLLocationCoordinate2DMake(yCoord, xCoord);
-        }
-        _coords = (CLLocationCoordinate2D *) malloc( sizeof(CLLocationCoordinate2D) * _numberOfCoords );
-        memcpy(_coords, coords, sizeof(CLLocationCoordinate2D) * _numberOfCoords );
-        
-        GEOSCoordSeq_destroy_r(handle, sequence);
+    
+    if (self)
+    {
+        [self loadInteriors];
+        [self loadExteriorRing];
     }
+    
     return self;
 }
 
--(id)initWithGeosGeometry:(void *)geom {
+-(id)initWithGeosGeometry: (void *)geom
+{
     self = [super initWithGeosGeometry: geom];
-    if (self) {
-        
-        GEOSContextHandle_t handle = _handle;
-
-        GEOSCoordSequence *sequence = GEOSCoordSeq_clone_r(handle, GEOSGeom_getCoordSeq_r(handle, GEOSGetExteriorRing_r(handle, _geosGeom)));
-        GEOSCoordSeq_getSize_r(handle, sequence, &_numberOfCoords);
-        CLLocationCoordinate2D coords[_numberOfCoords];
-        
-        for (int coord = 0; coord < _numberOfCoords; coord++) {
-            double xCoord = NULL;
-            GEOSCoordSeq_getX_r(handle, sequence, coord, &xCoord);
-            
-            double yCoord = NULL;
-            GEOSCoordSeq_getY_r(handle, sequence, coord, &yCoord);
-            coords[coord] = CLLocationCoordinate2DMake(yCoord, xCoord);
-        }
-        _coords = (CLLocationCoordinate2D *) malloc( sizeof(CLLocationCoordinate2D) * _numberOfCoords );
-        memcpy(_coords, coords, sizeof(CLLocationCoordinate2D) * _numberOfCoords );
-        
-        GEOSCoordSeq_destroy_r(handle, sequence);
+    
+    if (self)
+    {
+        [self loadInteriors];
+        [self loadExteriorRing];
     }
+    
     return self;
 }
 
--(id)initWithCoordinates:(CLLocationCoordinate2D[])coordinates count:(unsigned int)count {
+-(id)initWithCoordinates: (CLLocationCoordinate2D[])coordinates count: (unsigned int)count
+{
     self = [self init];
-    if (self) {
+    
+    if (self)
+    {
         GEOSContextHandle_t handle = _handle;
-
         GEOSCoordSequence *seq = GEOSCoordSeq_create_r(handle, count,2);
         
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < count; i++)
+        {
             GEOSCoordSeq_setX_r(handle, seq, i, coordinates[i].longitude);
             GEOSCoordSeq_setY_r(handle, seq, i, coordinates[i].latitude);
         }
+        
         GEOSGeometry *ring = GEOSGeom_createLinearRing_r(handle, seq);
-        _geosGeom = GEOSGeom_createPolygon_r(handle, ring, NULL, 0);
+        self.geosGeom = GEOSGeom_createPolygon_r(handle, ring, NULL, 0);
         
         // TODO: Move the destroy into the dealloc method
         // GEOSCoordSeq_destroy(seq);
+        
         _numberOfCoords = count;
         _coords = (CLLocationCoordinate2D *) malloc( sizeof(CLLocationCoordinate2D) * _numberOfCoords );
         memcpy(_coords, coordinates, sizeof(CLLocationCoordinate2D) * _numberOfCoords );
-        
-        GEOSWKTWriter *WKTWriter = GEOSWKTWriter_create_r(handle);
-        self.wktGeom = [NSString stringWithUTF8String:GEOSWKTWriter_write_r(handle, WKTWriter, _geosGeom)];
-        GEOSWKTWriter_destroy_r(handle, WKTWriter);
-    }    
+    }
     return self;
     
+}
+
+- (void) loadInteriors
+{
+    GEOSCoordSequence *sequence = nil;
+    GEOSContextHandle_t handle = _handle;
+    GEOSGeometry *geosGeom = _geosGeom;
+    
+    // Loop interior rings to convert to ShapeKitPolygons
+    int numInteriorRings = GEOSGetNumInteriorRings_r(handle, geosGeom);
+    NSMutableArray *interiors = [[NSMutableArray alloc] init];
+    for (int interiorIndex = 0; interiorIndex < numInteriorRings; interiorIndex++)
+    {
+        const GEOSGeometry *interior = GEOSGetInteriorRingN_r(handle, geosGeom, interiorIndex);
+        sequence = GEOSCoordSeq_clone_r(handle, GEOSGeom_getCoordSeq_r(handle, interior));
+        
+        unsigned int numCoordsInt = 0;
+        GEOSCoordSeq_getSize_r(handle, sequence, &numCoordsInt);
+        CLLocationCoordinate2D coordsInt[numCoordsInt];
+        
+        for (int coord = 0; coord < numCoordsInt; coord++)
+        {
+            double xCoord = NULL;
+            GEOSCoordSeq_getX_r(handle, sequence, coord, &xCoord);
+            
+            double yCoord = NULL;
+            GEOSCoordSeq_getY_r(handle, sequence, coord, &yCoord);
+            
+            coordsInt[coord] = CLLocationCoordinate2DMake(yCoord, xCoord);
+        }
+        
+        ShapeKitPolygon *curInterior = [[ShapeKitPolygon alloc] initWithCoordinates: coordsInt count: numCoordsInt];
+        [interiors addObject: curInterior];
+        
+        GEOSCoordSeq_destroy_r(handle, sequence);
+    }
+    
+    if ([interiors count])
+        _interiors = [interiors copy];
+}
+
+
+- (void) loadExteriorRing
+{
+    GEOSCoordSequence *sequence = nil;
+    GEOSContextHandle_t handle = _handle;
+    GEOSGeometry *geosGeom = _geosGeom;
+    
+    const GEOSGeometry *exterior = GEOSGetExteriorRing_r(handle, geosGeom);
+    sequence = GEOSCoordSeq_clone_r(handle, GEOSGeom_getCoordSeq_r(handle, exterior));
+    GEOSCoordSeq_getSize_r(handle, sequence, &_numberOfCoords);
+    
+    CLLocationCoordinate2D coordsExt[_numberOfCoords];
+    for (int coord = 0; coord < _numberOfCoords; coord++)
+    {
+        double xCoord = NULL;
+        GEOSCoordSeq_getX_r(handle, sequence, coord, &xCoord);
+        
+        double yCoord = NULL;
+        GEOSCoordSeq_getY_r(handle, sequence, coord, &yCoord);
+        
+        coordsExt[coord] = CLLocationCoordinate2DMake(yCoord, xCoord);
+    }
+    
+    _coords = (CLLocationCoordinate2D *) malloc( sizeof(CLLocationCoordinate2D) * _numberOfCoords );
+    memcpy(_coords, coordsExt, sizeof(CLLocationCoordinate2D) * _numberOfCoords );
+    
+    GEOSCoordSeq_destroy_r(handle, sequence);
 }
 
 @end
