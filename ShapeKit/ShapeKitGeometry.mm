@@ -58,7 +58,7 @@ void log_and_exit(const char *fmt,...);
     if (self != nil)
     {
         // initialize GEOS library
-        _handle = initGEOS_r(notice, log_and_exit);
+        self.handle = initGEOS_r(notice, log_and_exit);
         _coords = NULL;
     }
     
@@ -78,10 +78,7 @@ void log_and_exit(const char *fmt,...);
         GEOSWKBReader_destroy_r(handle, WKBReader);
         
         self.geomType = [NSString stringWithUTF8String: GEOSGeomType_r(handle, self.geosGeom)];
-        
-        GEOSWKTWriter *WKTWriter = GEOSWKTWriter_create_r(handle);
-        self.wktGeom = [NSString stringWithUTF8String:GEOSWKTWriter_write_r(handle, WKTWriter, self.geosGeom)];
-        GEOSWKTWriter_destroy_r(handle, WKTWriter);
+        self.wktGeom = [self wktFromGEOS];
     }
     
     return self;
@@ -96,15 +93,11 @@ void log_and_exit(const char *fmt,...);
         GEOSContextHandle_t handle = (GEOSContextHandle_t)_handle;
         
         GEOSWKTReader *WKTReader = GEOSWKTReader_create_r(handle);
-        _geosGeom = GEOSWKTReader_read_r(handle, WKTReader, [wkt UTF8String]);
+        self.geosGeom = GEOSWKTReader_read_r(handle, WKTReader, [wkt UTF8String]);
         GEOSWKTReader_destroy_r(handle, WKTReader);
       
-        GEOSGeometry *geosGeom = self.geosGeom;
-        self.geomType = [NSString stringWithUTF8String:GEOSGeomType_r(handle, geosGeom)];
-        
-        GEOSWKTWriter *WKTWriter = GEOSWKTWriter_create_r(handle);
-        self.wktGeom = [NSString stringWithUTF8String:GEOSWKTWriter_write_r(handle, WKTWriter, geosGeom)];
-        GEOSWKTWriter_destroy_r(handle, WKTWriter);
+        self.geomType = [NSString stringWithUTF8String:GEOSGeomType_r(handle, self.geosGeom)];
+        self.wktGeom = [self wktFromGEOS];
     }
     
     return self;
@@ -118,14 +111,26 @@ void log_and_exit(const char *fmt,...);
     {
         GEOSContextHandle_t handle = (GEOSContextHandle_t)_handle;
 
-        _geosGeom = (GEOSGeometry *)geom;
-        self.geomType = [NSString stringWithUTF8String:GEOSGeomType_r(handle, _geosGeom)];
-        GEOSWKTWriter *WKTWriter = GEOSWKTWriter_create_r(handle);
-        self.wktGeom = [NSString stringWithUTF8String:GEOSWKTWriter_write_r(handle, WKTWriter, _geosGeom)];
-        GEOSWKTWriter_destroy_r(handle, WKTWriter);
+        self.geosGeom = (GEOSGeometry *)geom;
+        
+        self.geomType = [NSString stringWithUTF8String:GEOSGeomType_r(handle, self.geosGeom)];
+        self.wktGeom = [self wktFromGEOS];
     }
     return self;    
 }
+
+- (NSString*) wktFromGEOS
+{
+    GEOSContextHandle_t handle = (GEOSContextHandle_t) _handle;
+    NSString *wkt = nil;
+    
+    GEOSWKTWriter *WKTWriter = GEOSWKTWriter_create_r(handle);
+    wkt = [NSString stringWithUTF8String:GEOSWKTWriter_write_r(handle, WKTWriter, self.geosGeom)];
+    GEOSWKTWriter_destroy_r(handle, WKTWriter);
+    
+    return wkt;
+}
+
 
 -(NSString *)description
 {
@@ -251,21 +256,23 @@ void log_and_exit(const char *fmt,...) {
 - (id) initWithWKT: (NSString *)wkt
 {
     self = [super initWithWKT:wkt];
-        GEOSCoordSequence *sequence = GEOSCoordSeq_clone_r(_handle, GEOSGeom_getCoordSeq(_geosGeom));
     
     if (self)
     {
+        GEOSContextHandle_t handle = (GEOSContextHandle_t)_handle;
+        GEOSCoordSequence *sequence = GEOSCoordSeq_clone_r(handle, GEOSGeom_getCoordSeq(_geosGeom));
+        
         double xCoord;
-        GEOSCoordSeq_getX_r(_handle, sequence, 0, &xCoord);
+        GEOSCoordSeq_getX_r(handle, sequence, 0, &xCoord);
         
         double yCoord;
-        GEOSCoordSeq_getY_r(_handle, sequence, 0, &yCoord);
+        GEOSCoordSeq_getY_r(handle, sequence, 0, &yCoord);
          
         _coords = (CLLocationCoordinate2D *) malloc( sizeof(CLLocationCoordinate2D) );
         *_coords = CLLocationCoordinate2DMake(yCoord, xCoord);
                         
-        GEOSCoordSeq_getSize_r(_handle, sequence, &_numberOfCoords);
-        GEOSCoordSeq_destroy_r(_handle, sequence);
+        GEOSCoordSeq_getSize_r(handle, sequence, &_numberOfCoords);
+        GEOSCoordSeq_destroy_r(handle, sequence);
     }
     
     return self;
@@ -278,8 +285,8 @@ void log_and_exit(const char *fmt,...) {
     if (self)
     {
         GEOSContextHandle_t handle = (GEOSContextHandle_t)_handle;
-
-        GEOSCoordSequence *sequence = GEOSCoordSeq_clone_r(handle, GEOSGeom_getCoordSeq_r(_handle, _geosGeom));
+        GEOSCoordSequence *sequence = GEOSCoordSeq_clone_r(handle, GEOSGeom_getCoordSeq_r(handle, _geosGeom));
+        
         double xCoord;
         GEOSCoordSeq_getX_r(handle, sequence, 0, &xCoord);
         
@@ -311,7 +318,8 @@ void log_and_exit(const char *fmt,...) {
         GEOSGeometry *newGeosGeom = GEOSGeom_createPoint_r(handle, seq);
         
         NSAssert (newGeosGeom != NULL, @"Error creating ShapeKitPoint");
-        _geosGeom=newGeosGeom;
+        
+        self.geosGeom = newGeosGeom;
         
         // TODO: Move the destroy into the dealloc method
         // GEOSCoordSeq_destroy(seq);
@@ -319,12 +327,8 @@ void log_and_exit(const char *fmt,...) {
         _coords = (CLLocationCoordinate2D *) malloc( sizeof(CLLocationCoordinate2D) );
         *_coords = coordinate;
         
-        GEOSWKTWriter *WKTWriter = GEOSWKTWriter_create_r(handle);
-        char *wktString = GEOSWKTWriter_write_r(handle, WKTWriter, newGeosGeom);
-        self.wktGeom = [NSString stringWithUTF8String: wktString];
-        GEOSWKTWriter_destroy_r(handle, WKTWriter);        
-        
-    }    
+        self.wktGeom = [self wktFromGEOS];
+    }
     
     return self;
 }
@@ -429,9 +433,7 @@ void log_and_exit(const char *fmt,...) {
         _coords = (CLLocationCoordinate2D *) malloc( sizeof(CLLocationCoordinate2D) * _numberOfCoords );
         memcpy(_coords, coordinates, sizeof(CLLocationCoordinate2D) * _numberOfCoords );
         
-        GEOSWKTWriter *WKTWriter = GEOSWKTWriter_create_r(_handle);
-        self.wktGeom = [NSString stringWithUTF8String:GEOSWKTWriter_write_r(_handle, WKTWriter, _geosGeom)];
-        GEOSWKTWriter_destroy_r(_handle, WKTWriter);
+        self.wktGeom = [self wktFromGEOS];
     }
     return self;
 }
