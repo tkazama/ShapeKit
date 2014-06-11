@@ -26,6 +26,7 @@ void log_and_exit(const char *fmt,...);
     GEOSGeometry *_geosGeom;
     unsigned int _numberOfCoords;
     CLLocationCoordinate2D *_coords;
+    NSString *_wktGeom;
 }
 
 
@@ -76,7 +77,6 @@ void log_and_exit(const char *fmt,...);
         GEOSWKBReader_destroy_r(handle, WKBReader);
         
         self.geomType = [NSString stringWithUTF8String: GEOSGeomType_r(handle, self.geosGeom)];
-        self.wktGeom = [self wktFromGEOS];
     }
     
     return self;
@@ -94,7 +94,6 @@ void log_and_exit(const char *fmt,...);
         GEOSWKTReader_destroy_r(handle, WKTReader);
       
         self.geomType = [NSString stringWithUTF8String:GEOSGeomType_r(handle, self.geosGeom)];
-        self.wktGeom = [self wktFromGEOS];
     }
     
     return self;
@@ -110,7 +109,6 @@ void log_and_exit(const char *fmt,...);
         self.geosGeom = (GEOSGeometry *)geom;
         
         self.geomType = [NSString stringWithUTF8String:GEOSGeomType_r(handle, self.geosGeom)];
-        self.wktGeom = [self wktFromGEOS];
     }
     return self;    
 }
@@ -126,6 +124,14 @@ void log_and_exit(const char *fmt,...);
     return wkt;
 }
 
+- (NSString *)wktGeom {
+    if (_wktGeom == nil)
+    {
+        _wktGeom = [self wktFromGEOS];
+    }
+    
+    return _wktGeom;
+}
 
 - (NSString *)description {
     NSMutableString *pointsList = [[NSMutableString alloc] init];
@@ -304,8 +310,6 @@ void log_and_exit(const char *fmt,...) {
         
         _coords = (CLLocationCoordinate2D *) malloc( sizeof(CLLocationCoordinate2D) );
         *_coords = coordinate;
-        
-        self.wktGeom = [self wktFromGEOS];
     }
     
     return self;
@@ -409,8 +413,6 @@ void log_and_exit(const char *fmt,...) {
         _numberOfCoords = count;
         _coords = (CLLocationCoordinate2D *) malloc( sizeof(CLLocationCoordinate2D) * _numberOfCoords );
         memcpy(_coords, coordinates, sizeof(CLLocationCoordinate2D) * _numberOfCoords );
-        
-        self.wktGeom = [self wktFromGEOS];
     }
     return self;
 }
