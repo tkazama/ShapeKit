@@ -444,7 +444,7 @@ void log_and_exit(const char *fmt,...) {
     
     if (self)
     {
-        [self loadInteriors];
+        [self loadInteriorRings;
         [self loadExteriorRing];
     }
     
@@ -457,7 +457,7 @@ void log_and_exit(const char *fmt,...) {
     
     if (self)
     {
-        [self loadInteriors];
+        [self loadInteriorRings];
         [self loadExteriorRing];
     }
     
@@ -470,7 +470,7 @@ void log_and_exit(const char *fmt,...) {
     
     if (self)
     {
-        [self loadInteriors];
+        [self loadInteriorRings];
         [self loadExteriorRing];
     }
     
@@ -506,7 +506,7 @@ void log_and_exit(const char *fmt,...) {
     
 }
 
-- (void) loadInteriors
+- (void) loadInteriorRings
 {
     GEOSCoordSequence *sequence = nil;
     GEOSContextHandle_t handle = _handle;
