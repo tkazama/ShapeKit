@@ -23,15 +23,15 @@
 
 /** An init method to be create the object out of a Well-Known-Binary representation of a geometry.
  */
--(id)initWithWKB:(const unsigned char *) wkb size:(size_t)wkb_size;
+- (id)initWithWKB:(const unsigned char *)wkb size:(size_t)wkb_size;
 
 /** An init method to be create the object out of a Well-Known-Text representation of a geometry.
  */
--(id)initWithWKT:(NSString *) wkt;
+- (id)initWithWKT:(NSString *)wkt;
 
 /** An init method to be create the object out of an opaque GEOS data blob.
  */
--(id)initWithGeosGeometry:(void *)geom;
+- (id)initWithGeosGeometry:(void *)geom;
 
 /** @name Properties */
 
@@ -55,11 +55,11 @@
 
 /** This returns the index-th coordinate in the geometry's coordinates collection.
  */
--(CLLocationCoordinate2D) coordinateAtIndex: (NSInteger) index;
+- (CLLocationCoordinate2D)coordinateAtIndex:(NSInteger)index;
 
 /** This can be used to reproject coordinates to a different SRID.
  */
--(void) reprojectTo:(NSString *)newProjectionDefinition;
+- (void)reprojectTo:(NSString *)newProjectionDefinition;
 
 @end
 
@@ -70,7 +70,7 @@
  */
 @interface ShapeKitPoint : ShapeKitGeometry
 @property (readonly) CLLocationCoordinate2D coordinate;
--(id)initWithCoordinate:(CLLocationCoordinate2D)coordinate;
+- (id)initWithCoordinate:(CLLocationCoordinate2D)coordinate;
 @end
 
 /** ShapeKitPolyline offers a basic implementation of Linestring objects.
@@ -82,7 +82,7 @@
 /** ShapeKitPolygon offers a basic implementation of Polygon objects.
  */
 @interface ShapeKitPolygon : ShapeKitGeometry
--(id)initWithCoordinates:(CLLocationCoordinate2D[])coordinates count:(unsigned int)count;
+- (id)initWithCoordinates:(CLLocationCoordinate2D[])coordinates count:(unsigned int)count;
 @property (readonly) NSArray *interiors;
 @end
 
@@ -92,27 +92,27 @@
 /** ShapeKitPolyline is an abstract class that represents a collection of heterogeneous ShapeKitGeometry objects.
  */
 @interface ShapeKitGeometryCollection : ShapeKitGeometry
-- (NSUInteger) numberOfGeometries;
-- (ShapeKitGeometry*) geometryAtIndex: (NSInteger) index;
+- (NSUInteger)numberOfGeometries;
+- (ShapeKitGeometry *)geometryAtIndex:(NSInteger)index;
 @end
 
 /** ShapeKitPolyline models a collection of ShapeKitPolyline objects.
  */
 @interface ShapeKitMultiPolyline : ShapeKitGeometryCollection
-- (NSUInteger) numberOfPolylines;
-- (ShapeKitPolyline*) polylineAtIndex: (NSInteger) index;
+- (NSUInteger)numberOfPolylines;
+- (ShapeKitPolyline *)polylineAtIndex:(NSInteger)index;
 @end
 
 /** ShapeKitPoint models a collection of ShapeKitPoint objects.
  */
 @interface ShapeKitMultiPoint : ShapeKitGeometryCollection
-- (NSUInteger) numberOfPoints;
-- (ShapeKitPoint*) pointAtIndex: (NSInteger) index;
+- (NSUInteger)numberOfPoints;
+- (ShapeKitPoint *)pointAtIndex:(NSInteger)index;
 @end
 
 /** ShapeKitMultiPolygon models a collection of ShapeKitMultiPolygon objects.
  */
 @interface ShapeKitMultiPolygon : ShapeKitGeometryCollection
-- (NSUInteger) numberOfPolygons;
-- (ShapeKitPolygon*) polygonAtIndex: (NSInteger) index;
+- (NSUInteger)numberOfPolygons;
+- (ShapeKitPolygon *)polygonAtIndex:(NSInteger)index;
 @end

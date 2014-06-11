@@ -51,8 +51,7 @@ void log_and_exit(const char *fmt,...);
 @implementation ShapeKitGeometry
 
 #pragma mark ShapeKitGeometry init and dealloc methods
-- (id) init
-{
+- (id)init {
     self = [super init];
     
     if (self != nil)
@@ -65,8 +64,7 @@ void log_and_exit(const char *fmt,...);
     return self;
 }
 
--(id)initWithWKB:(const unsigned char *) wkb size:(size_t)wkb_size
-{
+- (id)initWithWKB:(const unsigned char *)wkb size:(size_t)wkb_size {
     self = [self init];
     
     if (self)
@@ -84,8 +82,7 @@ void log_and_exit(const char *fmt,...);
     return self;
 }
 
--(id)initWithWKT:(NSString *) wkt
-{
+- (id)initWithWKT:(NSString *)wkt {
     self = [self init];
     
     if (self)
@@ -103,8 +100,7 @@ void log_and_exit(const char *fmt,...);
     return self;
 }
 
--(id)initWithGeosGeometry:(void *)geom
-{
+- (id)initWithGeosGeometry:(void *)geom {
     self = [self init];
     
     if (self)
@@ -119,8 +115,7 @@ void log_and_exit(const char *fmt,...);
     return self;    
 }
 
-- (NSString*) wktFromGEOS
-{
+- (NSString *)wktFromGEOS {
     GEOSContextHandle_t handle = (GEOSContextHandle_t) _handle;
     NSString *wkt = nil;
     
@@ -132,8 +127,7 @@ void log_and_exit(const char *fmt,...);
 }
 
 
--(NSString *)description
-{
+- (NSString *)description {
     NSMutableString *pointsList = [[NSMutableString alloc] init];
     CLLocationCoordinate2D* curCoords = NULL;
     
@@ -146,15 +140,13 @@ void log_and_exit(const char *fmt,...);
     return [[super description] stringByAppendingFormat: @"%@", pointsList];
 }
 
-- (CLLocationCoordinate2D) coordinateAtIndex: (NSInteger) index
-{
+- (CLLocationCoordinate2D)coordinateAtIndex:(NSInteger)index {
     NSAssert ((index >= 0) && (index < self.numberOfCoords), @"Error in ShapeKitGeometry class: index must be smaller than numberOfCoords");
 
     return _coords[index];
 }
 
--(void) reprojectTo:(NSString *)newProjectionDefinition
-{
+- (void) reprojectTo:(NSString *)newProjectionDefinition {
     // TODO: Impliment this as an SRID int stored on the geom rather than a proj4 string
 	projPJ source, destination;
 	source = pj_init_plus([self.projDefinition UTF8String]);
@@ -200,8 +192,7 @@ void log_and_exit(const char *fmt,...);
 	pj_free(destination);
 }
 
-- (void) dealloc
-{
+- (void)dealloc {
     if (_coords)
         free (_coords);
 
@@ -241,8 +232,7 @@ void log_and_exit(const char *fmt,...) {
 
 @implementation ShapeKitPoint
 
-- (id) init
-{
+- (id)init {
     self = [super init];
     
     if (self)
@@ -253,8 +243,7 @@ void log_and_exit(const char *fmt,...) {
     return self;
 }
 
-- (id) initWithWKT: (NSString *)wkt
-{
+- (id)initWithWKT:(NSString *)wkt {
     self = [super initWithWKT:wkt];
     
     if (self)
@@ -265,8 +254,7 @@ void log_and_exit(const char *fmt,...) {
     return self;
 }
 
-- (id) initWithGeosGeometry: (void *)geom
-{
+- (id)initWithGeosGeometry:(void *)geom {
     self = [super initWithGeosGeometry:geom];
     
     if (self)
@@ -277,8 +265,7 @@ void log_and_exit(const char *fmt,...) {
     return self;
 }
 
-- (void) extractCoordinatesFromGEOSGeom
-{
+- (void)extractCoordinatesFromGEOSGeom {
     GEOSContextHandle_t handle = (GEOSContextHandle_t)_handle;
     GEOSCoordSequence *sequence = GEOSCoordSeq_clone_r(handle, GEOSGeom_getCoordSeq_r(handle, _geosGeom));
     
@@ -295,8 +282,7 @@ void log_and_exit(const char *fmt,...) {
     GEOSCoordSeq_destroy_r(handle, sequence);
 }
 
--(id)initWithCoordinate:(CLLocationCoordinate2D)coordinate
-{
+- (id)initWithCoordinate:(CLLocationCoordinate2D)coordinate {
     self = [self init];
     
     if (self)
@@ -325,8 +311,7 @@ void log_and_exit(const char *fmt,...) {
     return self;
 }
 
--(CLLocationCoordinate2D)coordinate
-{
+- (CLLocationCoordinate2D)coordinate {
     return [self coordinateAtIndex: 0];    
 }
 
@@ -336,7 +321,7 @@ void log_and_exit(const char *fmt,...) {
 
 @implementation ShapeKitPolyline
 
--(id)initWithWKB:(const unsigned char *) wkb size:(size_t)wkb_size{
+- (id)initWithWKB:(const unsigned char *)wkb size:(size_t)wkb_size {
     self = [super initWithWKB:wkb size:wkb_size];
     if (self) {
 
@@ -360,7 +345,7 @@ void log_and_exit(const char *fmt,...) {
     return self;
 }
 
--(id)initWithWKT:(NSString *) wkt {
+- (id)initWithWKT:(NSString *)wkt {
     self = [super initWithWKT:wkt];
     if (self) {
         GEOSCoordSequence *sequence = GEOSCoordSeq_clone_r(_handle, GEOSGeom_getCoordSeq_r(_handle, _geosGeom));
@@ -384,7 +369,7 @@ void log_and_exit(const char *fmt,...) {
     return self;
 }
 
--(id)initWithGeosGeometry:(void *)geom {
+- (id)initWithGeosGeometry:(void *)geom {
     self = [super initWithGeosGeometry:geom];
     if (self) {
         GEOSCoordSequence *sequence = GEOSCoordSeq_clone_r(_handle, GEOSGeom_getCoordSeq_r(_handle, _geosGeom));
@@ -408,7 +393,7 @@ void log_and_exit(const char *fmt,...) {
     
 }
 
--(id)initWithCoordinates:(CLLocationCoordinate2D[])coordinates count:(unsigned int)count {
+- (id)initWithCoordinates:(CLLocationCoordinate2D[])coordinates count:(unsigned int)count {
     self = [self init];
     if (self) {
         GEOSCoordSequence *seq = GEOSCoordSeq_create_r(_handle, count,2);
@@ -438,8 +423,7 @@ void log_and_exit(const char *fmt,...) {
 @implementation ShapeKitPolygon
 @synthesize interiors = _interiors;
 
--(id)initWithWKB:(const unsigned char *) wkb size:(size_t)wkb_size
-{
+- (id)initWithWKB:(const unsigned char *)wkb size:(size_t)wkb_size {
     self = [super initWithWKB:wkb size:wkb_size];
     
     if (self)
@@ -451,8 +435,7 @@ void log_and_exit(const char *fmt,...) {
     return self;
 }
 
--(id)initWithWKT: (NSString *)wkt
-{
+- (id)initWithWKT:(NSString *)wkt {
     self = [super initWithWKT:wkt];
     
     if (self)
@@ -464,8 +447,7 @@ void log_and_exit(const char *fmt,...) {
     return self;
 }
 
--(id)initWithGeosGeometry: (void *)geom
-{
+- (id)initWithGeosGeometry:(void *)geom {
     self = [super initWithGeosGeometry: geom];
     
     if (self)
@@ -477,8 +459,7 @@ void log_and_exit(const char *fmt,...) {
     return self;
 }
 
--(id)initWithCoordinates: (CLLocationCoordinate2D[])coordinates count: (unsigned int)count
-{
+- (id)initWithCoordinates:(CLLocationCoordinate2D[])coordinates count: (unsigned int)count {
     self = [self init];
     
     if (self)
@@ -506,8 +487,7 @@ void log_and_exit(const char *fmt,...) {
     
 }
 
-- (void) loadInteriorRings
-{
+- (void)loadInteriorRings {
     GEOSCoordSequence *sequence = nil;
     GEOSContextHandle_t handle = _handle;
     GEOSGeometry *geosGeom = _geosGeom;
@@ -546,8 +526,7 @@ void log_and_exit(const char *fmt,...) {
 }
 
 
-- (void) loadExteriorRing
-{
+- (void)loadExteriorRing {
     GEOSCoordSequence *sequence = nil;
     GEOSContextHandle_t handle = _handle;
     GEOSGeometry *geosGeom = _geosGeom;
@@ -581,8 +560,7 @@ void log_and_exit(const char *fmt,...) {
 
 @implementation ShapeKitGeometryCollection
 
--(id)init
-{
+- (id)init {
     self = [super init];
     
     if (self)
@@ -592,13 +570,11 @@ void log_and_exit(const char *fmt,...) {
     return self;
 }
 
--(void)dealloc
-{
+- (void)dealloc {
     _geometries = nil;
 }
 
-- (id) initWithWKB: (const unsigned char *)wkb size: (size_t)wkb_size
-{
+- (id)initWithWKB:(const unsigned char *)wkb size:(size_t)wkb_size {
     self = [super initWithWKB:wkb size:wkb_size];
     
     if (self)
@@ -609,8 +585,7 @@ void log_and_exit(const char *fmt,...) {
     return self;
 }
 
-- (id) initWithGeosGeometry: (void *)geom
-{
+- (id)initWithGeosGeometry:(void *)geom {
     self = [super initWithGeosGeometry: geom];
     
     if (self)
@@ -621,8 +596,7 @@ void log_and_exit(const char *fmt,...) {
     return self;
 }
 
-- (id) initWithWKT: (NSString *)wkt
-{
+- (id)initWithWKT:(NSString *)wkt {
     self = [super initWithWKT:wkt];
     
     if (self)
@@ -635,8 +609,7 @@ void log_and_exit(const char *fmt,...) {
 
 // create an array of copy of original geometries
 // (double memory footprint, but faster access to data
-- (void) loadSubGeometries
-{
+- (void)loadSubGeometries {
     GEOSContextHandle_t handle = _handle;
 
     int numGeometries = GEOSGetNumGeometries_r(handle, self.geosGeom);
@@ -652,18 +625,15 @@ void log_and_exit(const char *fmt,...) {
     _geometries = [mArray copy];
 }
 
-- (NSUInteger) numberOfGeometries
-{
+- (NSUInteger)numberOfGeometries {
     return self.geometries.count;
 }
 
-- (ShapeKitGeometry*) geometryAtIndex: (NSInteger) index
-{
+- (ShapeKitGeometry *)geometryAtIndex:(NSInteger)index {
     return [self.geometries objectAtIndex:index];
 }
 
--(NSString *)description
-{
+- (NSString *)description {
     NSMutableString *geomsList = [[NSMutableString alloc] init];
     
     int i=0;
@@ -677,18 +647,18 @@ void log_and_exit(const char *fmt,...) {
 
 #pragma mark MultiLineString
 @implementation ShapeKitMultiPolyline
-- (NSUInteger) numberOfPolylines        { return [super numberOfGeometries]; }
-- (ShapeKitPolyline*) polylineAtIndex: (NSInteger) index     { return (ShapeKitPolyline *) [super geometryAtIndex: index]; }
+- (NSUInteger)numberOfPolylines     { return [super numberOfGeometries]; }
+- (ShapeKitPolyline*)polylineAtIndex:(NSInteger)index   { return (ShapeKitPolyline *)[super geometryAtIndex: index]; }
 @end
 
 #pragma mark MultiPoint
 @implementation ShapeKitMultiPoint
-- (NSUInteger) numberOfPoints   { return [super numberOfGeometries]; }
-- (ShapeKitPoint*) pointAtIndex: (NSInteger) index     { return  (ShapeKitPoint *)[super geometryAtIndex: index]; }
+- (NSUInteger)numberOfPoints        { return [super numberOfGeometries]; }
+- (ShapeKitPoint*)pointAtIndex:(NSInteger)index         { return  (ShapeKitPoint *)[super geometryAtIndex: index]; }
 @end
 
 #pragma mark MultiPolygon
 @implementation ShapeKitMultiPolygon
-- (NSUInteger) numberOfPolygons { return [super numberOfGeometries]; }
-- (ShapeKitPolygon*) polygonAtIndex: (NSInteger) index       { return  (ShapeKitPolygon *)[super geometryAtIndex: index]; }
+- (NSUInteger)numberOfPolygons      { return [super numberOfGeometries]; }
+- (ShapeKitPolygon*)polygonAtIndex:(NSInteger)index     { return  (ShapeKitPolygon *)[super geometryAtIndex: index]; }
 @end
