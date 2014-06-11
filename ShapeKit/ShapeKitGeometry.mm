@@ -428,7 +428,7 @@ void log_and_exit(const char *fmt,...) {
     
     if (self)
     {
-        [self loadInteriorRings;
+        [self loadInteriorRings];
         [self loadExteriorRing];
     }
     
