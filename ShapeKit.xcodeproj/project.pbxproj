@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		71D0AD4830CF417DAEAF69FF /* libPods-ShapeKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 72C32FF98E8643EB862CBB30 /* libPods-ShapeKit.a */; };
 		CD90C1701668A378006E5D8F /* ShapeKitFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = CD90C1671668A36F006E5D8F /* ShapeKitFactory.m */; };
 		CD90C1711668A378006E5D8F /* ShapeKitGeometry.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD90C1691668A36F006E5D8F /* ShapeKitGeometry.mm */; };
 		CD90C1721668A378006E5D8F /* ShapeKitGeometry+Predicates.m in Sources */ = {isa = PBXBuildFile; fileRef = CD90C16B1668A36F006E5D8F /* ShapeKitGeometry+Predicates.m */; };
@@ -32,11 +33,45 @@
 		CD90C1781668A37E006E5D8F /* ShapeKitGeometry+Predicates.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CD90C16A1668A36F006E5D8F /* ShapeKitGeometry+Predicates.h */; };
 		CD90C1791668A384006E5D8F /* ShapeKitGeometry+Topology.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CD90C16C1668A36F006E5D8F /* ShapeKitGeometry+Topology.h */; };
 		CD90C17A1668A384006E5D8F /* ShapeKitPolyline+Linearref.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CD90C16E1668A36F006E5D8F /* ShapeKitPolyline+Linearref.h */; };
-		CD90C17E1668A90C006E5D8F /* libgeos_c.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD90C17D1668A90C006E5D8F /* libgeos_c.a */; };
-		CD90C1801668A90F006E5D8F /* libgeos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD90C17F1668A90F006E5D8F /* libgeos.a */; };
-		CD90C1821668A911006E5D8F /* libproj.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD90C1811668A911006E5D8F /* libproj.a */; };
 		CDA9A76B1667C87A0008D661 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA9A76A1667C87A0008D661 /* Foundation.framework */; };
+		CDE3B2B81983C00400DCC7BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA9A76A1667C87A0008D661 /* Foundation.framework */; };
+		CDE3B2BA1983C00400DCC7BA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE3B2B91983C00400DCC7BA /* CoreGraphics.framework */; };
+		CDE3B2BC1983C00400DCC7BA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE3B2BB1983C00400DCC7BA /* UIKit.framework */; };
+		CDE3B2D11983C00400DCC7BA /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE3B2D01983C00400DCC7BA /* XCTest.framework */; };
+		CDE3B2D21983C00500DCC7BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA9A76A1667C87A0008D661 /* Foundation.framework */; };
+		CDE3B2D31983C00500DCC7BA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE3B2BB1983C00400DCC7BA /* UIKit.framework */; };
+		CDE3B2DB1983C00500DCC7BA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CDE3B2D91983C00500DCC7BA /* InfoPlist.strings */; };
+		CDE3B2DD1983C00500DCC7BA /* ShapeKitDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE3B2DC1983C00500DCC7BA /* ShapeKitDemoTests.m */; };
+		CDE3B2FF1983C00E00DCC7BA /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDE3B2EB1983C00E00DCC7BA /* MainWindow.xib */; };
+		CDE3B3001983C00E00DCC7BA /* NSString+HexToData.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE3B2ED1983C00E00DCC7BA /* NSString+HexToData.m */; };
+		CDE3B3011983C00E00DCC7BA /* PlanID20-82.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDE3B2EE1983C00E00DCC7BA /* PlanID20-82.plist */; };
+		CDE3B3021983C00E00DCC7BA /* PlanID20-83.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDE3B2EF1983C00E00DCC7BA /* PlanID20-83.plist */; };
+		CDE3B3031983C00E00DCC7BA /* PlanID20-84.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDE3B2F01983C00E00DCC7BA /* PlanID20-84.plist */; };
+		CDE3B3041983C00E00DCC7BA /* ShapeKit+MapKit.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE3B2F21983C00E00DCC7BA /* ShapeKit+MapKit.m */; };
+		CDE3B3051983C00E00DCC7BA /* ShapeKitAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE3B2F41983C00E00DCC7BA /* ShapeKitAppDelegate.m */; };
+		CDE3B3061983C00E00DCC7BA /* ShapeKitDemo-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDE3B2F51983C00E00DCC7BA /* ShapeKitDemo-Info.plist */; };
+		CDE3B3071983C00E00DCC7BA /* ShapeKitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE3B2F91983C00E00DCC7BA /* ShapeKitViewController.m */; };
+		CDE3B3081983C00E00DCC7BA /* ShapeKitViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDE3B2FA1983C00E00DCC7BA /* ShapeKitViewController.xib */; };
+		CDE3B30F1984249800DCC7BA /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDE3B30E1984249800DCC7BA /* main.mm */; };
+		CDE3B3181984279D00DCC7BA /* libShapeKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA9A7671667C87A0008D661 /* libShapeKit.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CDE3B2D41983C00500DCC7BA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDA9A75E1667C87A0008D661 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CDE3B2B61983C00400DCC7BA;
+			remoteInfo = ShapeKitDemo;
+		};
+		CDE3B30C198422A600DCC7BA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDA9A75E1667C87A0008D661 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CDA9A7661667C87A0008D661;
+			remoteInfo = ShapeKit;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		CDA9A7651667C87A0008D661 /* CopyFiles */ = {
@@ -57,7 +92,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		CD00688E1668BC3A0036627F /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		3A947EB114C64337BC591145 /* Pods-ShapeKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShapeKit.xcconfig"; path = "Pods/Pods-ShapeKit.xcconfig"; sourceTree = "<group>"; };
+		72C32FF98E8643EB862CBB30 /* libPods-ShapeKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ShapeKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9127DBD9F13D44A4A2CBF901 /* libPods-ShapeKitDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ShapeKitDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDBB71E3599C43EABE38813C /* Pods-ShapeKitDemo.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShapeKitDemo.xcconfig"; path = "Pods/Pods-ShapeKitDemo.xcconfig"; sourceTree = "<group>"; };
 		CD90C1651668A36F006E5D8F /* ShapeKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShapeKit.h; sourceTree = "<group>"; };
 		CD90C1661668A36F006E5D8F /* ShapeKitFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShapeKitFactory.h; sourceTree = "<group>"; };
 		CD90C1671668A36F006E5D8F /* ShapeKitFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShapeKitFactory.m; sourceTree = "<group>"; };
@@ -69,14 +107,38 @@
 		CD90C16D1668A36F006E5D8F /* ShapeKitGeometry+Topology.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "ShapeKitGeometry+Topology.m"; sourceTree = "<group>"; };
 		CD90C16E1668A36F006E5D8F /* ShapeKitPolyline+Linearref.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShapeKitPolyline+Linearref.h"; sourceTree = "<group>"; };
 		CD90C16F1668A36F006E5D8F /* ShapeKitPolyline+Linearref.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "ShapeKitPolyline+Linearref.m"; sourceTree = "<group>"; };
-		CD90C17C1668A5EA006E5D8F /* libs */ = {isa = PBXFileReference; lastKnownFileType = folder; name = libs; path = Libraries/libs; sourceTree = SOURCE_ROOT; };
-		CD90C17D1668A90C006E5D8F /* libgeos_c.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgeos_c.a; path = Libraries/libs/bin/libgeos_c.a; sourceTree = "<group>"; };
-		CD90C17F1668A90F006E5D8F /* libgeos.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgeos.a; path = Libraries/libs/bin/libgeos.a; sourceTree = "<group>"; };
-		CD90C1811668A911006E5D8F /* libproj.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libproj.a; path = Libraries/libs/bin/libproj.a; sourceTree = "<group>"; };
 		CD90C1831668AFFE006E5D8F /* ShapeKitPrivateInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShapeKitPrivateInterface.h; sourceTree = "<group>"; };
 		CDA9A7671667C87A0008D661 /* libShapeKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libShapeKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDA9A76A1667C87A0008D661 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CDA9A76E1667C87A0008D661 /* ShapeKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShapeKit-Prefix.pch"; sourceTree = "<group>"; };
+		CDE3B2B71983C00400DCC7BA /* ShapeKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShapeKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDE3B2B91983C00400DCC7BA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CDE3B2BB1983C00400DCC7BA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		CDE3B2CF1983C00400DCC7BA /* ShapeKitDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShapeKitDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDE3B2D01983C00400DCC7BA /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		CDE3B2D81983C00500DCC7BA /* ShapeKitDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ShapeKitDemoTests-Info.plist"; sourceTree = "<group>"; };
+		CDE3B2DA1983C00500DCC7BA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CDE3B2DC1983C00500DCC7BA /* ShapeKitDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShapeKitDemoTests.m; sourceTree = "<group>"; };
+		CDE3B2E81983C00E00DCC7BA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CDE3B2EA1983C00E00DCC7BA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CDE3B2EB1983C00E00DCC7BA /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		CDE3B2EC1983C00E00DCC7BA /* NSString+HexToData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HexToData.h"; sourceTree = "<group>"; };
+		CDE3B2ED1983C00E00DCC7BA /* NSString+HexToData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HexToData.m"; sourceTree = "<group>"; };
+		CDE3B2EE1983C00E00DCC7BA /* PlanID20-82.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "PlanID20-82.plist"; sourceTree = "<group>"; };
+		CDE3B2EF1983C00E00DCC7BA /* PlanID20-83.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "PlanID20-83.plist"; sourceTree = "<group>"; };
+		CDE3B2F01983C00E00DCC7BA /* PlanID20-84.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "PlanID20-84.plist"; sourceTree = "<group>"; };
+		CDE3B2F11983C00E00DCC7BA /* ShapeKit+MapKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ShapeKit+MapKit.h"; sourceTree = "<group>"; };
+		CDE3B2F21983C00E00DCC7BA /* ShapeKit+MapKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ShapeKit+MapKit.m"; sourceTree = "<group>"; };
+		CDE3B2F31983C00E00DCC7BA /* ShapeKitAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShapeKitAppDelegate.h; sourceTree = "<group>"; };
+		CDE3B2F41983C00E00DCC7BA /* ShapeKitAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShapeKitAppDelegate.m; sourceTree = "<group>"; };
+		CDE3B2F51983C00E00DCC7BA /* ShapeKitDemo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ShapeKitDemo-Info.plist"; sourceTree = "<group>"; };
+		CDE3B2F61983C00E00DCC7BA /* ShapeKitDemo-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ShapeKitDemo-Prefix.pch"; sourceTree = "<group>"; };
+		CDE3B2F71983C00E00DCC7BA /* ShapeKitDemo_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShapeKitDemo_Prefix.pch; sourceTree = "<group>"; };
+		CDE3B2F81983C00E00DCC7BA /* ShapeKitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShapeKitViewController.h; sourceTree = "<group>"; };
+		CDE3B2F91983C00E00DCC7BA /* ShapeKitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShapeKitViewController.m; sourceTree = "<group>"; };
+		CDE3B2FA1983C00E00DCC7BA /* ShapeKitViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShapeKitViewController.xib; sourceTree = "<group>"; };
+		CDE3B30E1984249800DCC7BA /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		CDE3B3161984272300DCC7BA /* libPods-ShapeKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-ShapeKit.a"; path = "Pods/build/Debug-iphoneos/libPods-ShapeKit.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,9 +147,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDA9A76B1667C87A0008D661 /* Foundation.framework in Frameworks */,
-				CD90C17E1668A90C006E5D8F /* libgeos_c.a in Frameworks */,
-				CD90C1801668A90F006E5D8F /* libgeos.a in Frameworks */,
-				CD90C1821668A911006E5D8F /* libproj.a in Frameworks */,
+				71D0AD4830CF417DAEAF69FF /* libPods-ShapeKit.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDE3B2B41983C00400DCC7BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDE3B3181984279D00DCC7BA /* libShapeKit.a in Frameworks */,
+				CDE3B2BA1983C00400DCC7BA /* CoreGraphics.framework in Frameworks */,
+				CDE3B2BC1983C00400DCC7BA /* UIKit.framework in Frameworks */,
+				CDE3B2B81983C00400DCC7BA /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDE3B2CC1983C00400DCC7BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDE3B2D11983C00400DCC7BA /* XCTest.framework in Frameworks */,
+				CDE3B2D31983C00500DCC7BA /* UIKit.framework in Frameworks */,
+				CDE3B2D21983C00500DCC7BA /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,13 +178,13 @@
 		CDA9A75C1667C87A0008D661 = {
 			isa = PBXGroup;
 			children = (
-				CD00688E1668BC3A0036627F /* libstdc++.dylib */,
-				CD90C1811668A911006E5D8F /* libproj.a */,
-				CD90C17F1668A90F006E5D8F /* libgeos.a */,
-				CD90C17D1668A90C006E5D8F /* libgeos_c.a */,
+				CDE3B2E41983C00E00DCC7BA /* ShapeKitDemo */,
 				CDA9A76C1667C87A0008D661 /* ShapeKit */,
+				CDE3B2D61983C00500DCC7BA /* ShapeKitDemoTests */,
 				CDA9A7691667C87A0008D661 /* Frameworks */,
 				CDA9A7681667C87A0008D661 /* Products */,
+				3A947EB114C64337BC591145 /* Pods-ShapeKit.xcconfig */,
+				BDBB71E3599C43EABE38813C /* Pods-ShapeKitDemo.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -111,6 +192,8 @@
 			isa = PBXGroup;
 			children = (
 				CDA9A7671667C87A0008D661 /* libShapeKit.a */,
+				CDE3B2B71983C00400DCC7BA /* ShapeKitDemo.app */,
+				CDE3B2CF1983C00400DCC7BA /* ShapeKitDemoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -118,7 +201,13 @@
 		CDA9A7691667C87A0008D661 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CDE3B3161984272300DCC7BA /* libPods-ShapeKit.a */,
 				CDA9A76A1667C87A0008D661 /* Foundation.framework */,
+				CDE3B2B91983C00400DCC7BA /* CoreGraphics.framework */,
+				CDE3B2BB1983C00400DCC7BA /* UIKit.framework */,
+				CDE3B2D01983C00400DCC7BA /* XCTest.framework */,
+				72C32FF98E8643EB862CBB30 /* libPods-ShapeKit.a */,
+				9127DBD9F13D44A4A2CBF901 /* libPods-ShapeKitDemo.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -128,7 +217,6 @@
 			children = (
 				CDA9A7921667C9310008D661 /* Classes */,
 				CDA9A76D1667C87A0008D661 /* Supporting Files */,
-				CD90C17C1668A5EA006E5D8F /* libs */,
 			);
 			path = ShapeKit;
 			sourceTree = "<group>";
@@ -160,6 +248,74 @@
 			name = Classes;
 			sourceTree = "<group>";
 		};
+		CDE3B2D61983C00500DCC7BA /* ShapeKitDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				CDE3B2DC1983C00500DCC7BA /* ShapeKitDemoTests.m */,
+				CDE3B2D71983C00500DCC7BA /* Supporting Files */,
+			);
+			path = ShapeKitDemoTests;
+			sourceTree = "<group>";
+		};
+		CDE3B2D71983C00500DCC7BA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CDE3B2D81983C00500DCC7BA /* ShapeKitDemoTests-Info.plist */,
+				CDE3B2D91983C00500DCC7BA /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CDE3B2E41983C00E00DCC7BA /* ShapeKitDemo */ = {
+			isa = PBXGroup;
+			children = (
+				CDE3B30A1983C03100DCC7BA /* Classes */,
+				CDE3B3091983C02600DCC7BA /* Supporting files */,
+				CDE3B2EB1983C00E00DCC7BA /* MainWindow.xib */,
+				CDE3B30B1983C04700DCC7BA /* Data */,
+				CDE3B2F71983C00E00DCC7BA /* ShapeKitDemo_Prefix.pch */,
+				CDE3B2FA1983C00E00DCC7BA /* ShapeKitViewController.xib */,
+			);
+			path = ShapeKitDemo;
+			sourceTree = "<group>";
+		};
+		CDE3B3091983C02600DCC7BA /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				CDE3B2E71983C00E00DCC7BA /* InfoPlist.strings */,
+				CDE3B2EA1983C00E00DCC7BA /* main.m */,
+				CDE3B2F51983C00E00DCC7BA /* ShapeKitDemo-Info.plist */,
+				CDE3B2F61983C00E00DCC7BA /* ShapeKitDemo-Prefix.pch */,
+			);
+			name = "Supporting files";
+			sourceTree = "<group>";
+		};
+		CDE3B30A1983C03100DCC7BA /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				CDE3B30E1984249800DCC7BA /* main.mm */,
+				CDE3B2EC1983C00E00DCC7BA /* NSString+HexToData.h */,
+				CDE3B2ED1983C00E00DCC7BA /* NSString+HexToData.m */,
+				CDE3B2F11983C00E00DCC7BA /* ShapeKit+MapKit.h */,
+				CDE3B2F21983C00E00DCC7BA /* ShapeKit+MapKit.m */,
+				CDE3B2F31983C00E00DCC7BA /* ShapeKitAppDelegate.h */,
+				CDE3B2F41983C00E00DCC7BA /* ShapeKitAppDelegate.m */,
+				CDE3B2F81983C00E00DCC7BA /* ShapeKitViewController.h */,
+				CDE3B2F91983C00E00DCC7BA /* ShapeKitViewController.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		CDE3B30B1983C04700DCC7BA /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				CDE3B2EE1983C00E00DCC7BA /* PlanID20-82.plist */,
+				CDE3B2EF1983C00E00DCC7BA /* PlanID20-83.plist */,
+				CDE3B2F01983C00E00DCC7BA /* PlanID20-84.plist */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -167,9 +323,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CDA9A7751667C87A0008D661 /* Build configuration list for PBXNativeTarget "ShapeKit" */;
 			buildPhases = (
+				1F439C766F8242BEAD0950C1 /* Check Pods Manifest.lock */,
 				CDA9A7631667C87A0008D661 /* Sources */,
 				CDA9A7641667C87A0008D661 /* Frameworks */,
 				CDA9A7651667C87A0008D661 /* CopyFiles */,
+				D4F747F85283414CB0D24773 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -180,6 +338,44 @@
 			productReference = CDA9A7671667C87A0008D661 /* libShapeKit.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		CDE3B2B61983C00400DCC7BA /* ShapeKitDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CDE3B2E21983C00500DCC7BA /* Build configuration list for PBXNativeTarget "ShapeKitDemo" */;
+			buildPhases = (
+				ADAFF0BA2CC44AA1BEA3B420 /* Check Pods Manifest.lock */,
+				CDE3B2B31983C00400DCC7BA /* Sources */,
+				CDE3B2B41983C00400DCC7BA /* Frameworks */,
+				CDE3B2B51983C00400DCC7BA /* Resources */,
+				D28C606C832C446CAC72599D /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CDE3B30D198422A600DCC7BA /* PBXTargetDependency */,
+			);
+			name = ShapeKitDemo;
+			productName = ShapeKitDemo;
+			productReference = CDE3B2B71983C00400DCC7BA /* ShapeKitDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CDE3B2CE1983C00400DCC7BA /* ShapeKitDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CDE3B2E31983C00500DCC7BA /* Build configuration list for PBXNativeTarget "ShapeKitDemoTests" */;
+			buildPhases = (
+				CDE3B2CB1983C00400DCC7BA /* Sources */,
+				CDE3B2CC1983C00400DCC7BA /* Frameworks */,
+				CDE3B2CD1983C00400DCC7BA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CDE3B2D51983C00500DCC7BA /* PBXTargetDependency */,
+			);
+			name = ShapeKitDemoTests;
+			productName = ShapeKitDemoTests;
+			productReference = CDE3B2CF1983C00400DCC7BA /* ShapeKitDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -187,6 +383,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0450;
+				TargetAttributes = {
+					CDE3B2CE1983C00400DCC7BA = {
+						TestTargetID = CDE3B2B61983C00400DCC7BA;
+					};
+				};
 			};
 			buildConfigurationList = CDA9A7611667C87A0008D661 /* Build configuration list for PBXProject "ShapeKit" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -202,11 +403,67 @@
 			targets = (
 				CDA9A7661667C87A0008D661 /* ShapeKit */,
 				CD345F2016F7630600B69077 /* ShapeKit documentation */,
+				CDE3B2B61983C00400DCC7BA /* ShapeKitDemo */,
+				CDE3B2CE1983C00400DCC7BA /* ShapeKitDemoTests */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		CDE3B2B51983C00400DCC7BA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDE3B3021983C00E00DCC7BA /* PlanID20-83.plist in Resources */,
+				CDE3B3081983C00E00DCC7BA /* ShapeKitViewController.xib in Resources */,
+				CDE3B3011983C00E00DCC7BA /* PlanID20-82.plist in Resources */,
+				CDE3B3061983C00E00DCC7BA /* ShapeKitDemo-Info.plist in Resources */,
+				CDE3B2FF1983C00E00DCC7BA /* MainWindow.xib in Resources */,
+				CDE3B3031983C00E00DCC7BA /* PlanID20-84.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDE3B2CD1983C00400DCC7BA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDE3B2DB1983C00500DCC7BA /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXShellScriptBuildPhase section */
+		1F439C766F8242BEAD0950C1 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		ADAFF0BA2CC44AA1BEA3B420 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		CD345F2416F7630A00B69077 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -219,6 +476,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/appledoc \\\n--project-name \"ShapeKit\" \\\n--project-company \"redcluster\" \\\n--company-id \"eu.redcluster\" \\\n--output \"${PROJECT_DIR}/Documentation\" \\\n--create-docset \\\n--install-docset \\\n--create-html \\\n--exit-threshold 2 \\\n--no-repeat-first-par \\\n--index-desc \"${PROJECT_DIR}/README.markdown\" \\\n\"${PROJECT_DIR}/ShapeKit\"";
+		};
+		D28C606C832C446CAC72599D /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-ShapeKitDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D4F747F85283414CB0D24773 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-ShapeKit-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -235,7 +522,59 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CDE3B2B31983C00400DCC7BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDE3B3001983C00E00DCC7BA /* NSString+HexToData.m in Sources */,
+				CDE3B3051983C00E00DCC7BA /* ShapeKitAppDelegate.m in Sources */,
+				CDE3B3071983C00E00DCC7BA /* ShapeKitViewController.m in Sources */,
+				CDE3B3041983C00E00DCC7BA /* ShapeKit+MapKit.m in Sources */,
+				CDE3B30F1984249800DCC7BA /* main.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDE3B2CB1983C00400DCC7BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDE3B2DD1983C00500DCC7BA /* ShapeKitDemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CDE3B2D51983C00500DCC7BA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CDE3B2B61983C00400DCC7BA /* ShapeKitDemo */;
+			targetProxy = CDE3B2D41983C00500DCC7BA /* PBXContainerItemProxy */;
+		};
+		CDE3B30D198422A600DCC7BA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CDA9A7661667C87A0008D661 /* ShapeKit */;
+			targetProxy = CDE3B30C198422A600DCC7BA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CDE3B2D91983C00500DCC7BA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CDE3B2DA1983C00500DCC7BA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		CDE3B2E71983C00E00DCC7BA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CDE3B2E81983C00E00DCC7BA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		CD345F2116F7630600B69077 /* Debug */ = {
@@ -301,12 +640,12 @@
 		};
 		CDA9A7761667C87A0008D661 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A947EB114C64337BC591145 /* Pods-ShapeKit.xcconfig */;
 			buildSettings = {
-				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_CXX_LIBRARY = "libstdc++";
 				DSTROOT = /tmp/ShapeKit.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ShapeKit/ShapeKit-Prefix.pch";
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/Libraries/libs/include";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libs\"",
@@ -315,18 +654,17 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = armv7;
 			};
 			name = Debug;
 		};
 		CDA9A7771667C87A0008D661 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A947EB114C64337BC591145 /* Pods-ShapeKit.xcconfig */;
 			buildSettings = {
-				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_CXX_LIBRARY = "libstdc++";
 				DSTROOT = /tmp/ShapeKit.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ShapeKit/ShapeKit-Prefix.pch";
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/Libraries/libs/include";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libs\"",
@@ -335,7 +673,144 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = armv7;
+			};
+			name = Release;
+		};
+		CDE3B2DE1983C00500DCC7BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDBB71E3599C43EABE38813C /* Pods-ShapeKitDemo.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ShapeKitDemo/ShapeKitDemo_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "ShapeKitDemo/ShapeKitDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		CDE3B2DF1983C00500DCC7BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDBB71E3599C43EABE38813C /* Pods-ShapeKitDemo.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ShapeKitDemo/ShapeKitDemo_Prefix.pch;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "ShapeKitDemo/ShapeKitDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		CDE3B2E01983C00500DCC7BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ShapeKitDemo.app/ShapeKitDemo";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ShapeKitDemo/ShapeKitDemo-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "ShapeKitDemoTests/ShapeKitDemoTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		CDE3B2E11983C00500DCC7BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ShapeKitDemo.app/ShapeKitDemo";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ShapeKitDemo/ShapeKitDemo-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "ShapeKitDemoTests/ShapeKitDemoTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
@@ -365,6 +840,24 @@
 			buildConfigurations = (
 				CDA9A7761667C87A0008D661 /* Debug */,
 				CDA9A7771667C87A0008D661 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CDE3B2E21983C00500DCC7BA /* Build configuration list for PBXNativeTarget "ShapeKitDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CDE3B2DE1983C00500DCC7BA /* Debug */,
+				CDE3B2DF1983C00500DCC7BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CDE3B2E31983C00500DCC7BA /* Build configuration list for PBXNativeTarget "ShapeKitDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CDE3B2E01983C00500DCC7BA /* Debug */,
+				CDE3B2E11983C00500DCC7BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
