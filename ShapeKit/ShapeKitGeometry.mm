@@ -29,10 +29,7 @@ void log_and_exit(const char *fmt,...);
     NSString *_wktGeom;
 }
 
-
-@property (readwrite, copy) NSString *wktGeom;
 @property (readwrite, copy) NSString *geomType;
-
 @property (readwrite, copy) NSString *projDefinition;
 
 @property (readwrite) GEOSGeometry *geosGeom;
