@@ -1,5 +1,8 @@
-# ShapeKit
+_Note_: this project will be discontinued soon.  
+If you are planning to build a new project using Swift, please consider [GEOSwift](https://github.com/andreacremaschi/GEOSwift).
 
+
+# ShapeKit
 
 ShapeKit is a iOS/OSX library that offers an Objective-C interface to the powerful [GEOS](http://trac.osgeo.org/geos/) library.
 Through GEOS, ShapeKit includes all the OpenGIS Simple Features for SQL spatial predicate functions and spatial operators, as well as specific JTS enhanced topology functions.
