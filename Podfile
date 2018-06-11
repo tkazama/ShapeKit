@@ -2,8 +2,6 @@
 # platform :ios, "6.0"
 
 target "ShapeKit" do
-pod 'geos'
-pod 'proj4'
 end
 
 target "ShapeKitDemo" do
